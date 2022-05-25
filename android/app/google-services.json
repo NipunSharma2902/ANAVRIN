@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "389643458761",
+    "project_id": "anavrin-44818",
+    "storage_bucket": "anavrin-44818.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389643458761:android:5ad8be0b8ca69dd468d518",
+        "android_client_info": {
+          "package_name": "com.example.anavrin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389643458761-bir0ik2edn7vgsi0rc33vpk671u6glnt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJpoeg1XZrAyk8m8H6GISN7GBdxgLrFdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389643458761-bir0ik2edn7vgsi0rc33vpk671u6glnt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

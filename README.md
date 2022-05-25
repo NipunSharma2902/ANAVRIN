@@ -1,16 +1,29 @@
-# anavrin
+# 🔥 Todo App
 
-Anavrin app
+An App To manage all your tasks with firebase backend.
 
-## Getting Started
+Star⭐ the repo if you like what you see😉.
 
-This project is a starting point for a Flutter application.
+## ✨ Features :
+- Login/SignUp with Firebase.
+- Login/SignUp with Google Account.
+- You don't have to login (Anonymous Mode).
+- Add/Remove Tasks Offline.
+- Beautiful UI.
+- Beautiful Animation.
+- The App will notify you when a task begins/ends.
 
-A few resources to get you started if this is your first Flutter project:
+## 📸 Screenshots :
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<img src="assets/onboarding.png" width="300"> <img src="assets/welcome.png" width="300"> <img src="assets/login.png" width="300">
+<img src="assets/homepage.png" width="300"> <img src="assets/addtask.png" width="300"> <img src="assets/settings.png" width="300">
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+**=> The icons are from [FlatIcon](https://www.flaticon.com/)**
+
+**=> The images are from [Storyset](https://storyset.com/)**
+
+## If you want to use this project add your firebase's account.
+
