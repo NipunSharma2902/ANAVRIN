@@ -32,7 +32,7 @@ class MyTextfield extends StatelessWidget {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       maxLines: 1,
-      maxLength: maxlenght,
+      maxLength: 50,
       readOnly: readonly,
       obscureText: obscure,
       keyboardType: keyboardtype,
