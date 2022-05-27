@@ -27,10 +27,21 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
+ 
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   static var currentdate = DateTime.now();
+
+  int pageIndex = 0;
+  
+  final pages = [
+    //const Page1(),
+    //const Page2(),
+    //const Page3(),
+    //const Page4(),
+  ];
+
 
   final TextEditingController _usercontroller = TextEditingController(
       text: FirebaseAuth.instance.currentUser!.displayName);
@@ -223,7 +234,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ));
               },
-            )));
+            )),
+            
+
+
+            bottomNavigationBar: buildMyNavBar(context),
+            );
   }
 
   Future<dynamic> _showBottomSheet(
@@ -414,4 +430,111 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+
+
+
+
+  Container buildMyNavBar(BuildContext context) {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+            enableFeedback: false,
+            onPressed: () {
+              setState(() {
+                pageIndex = 0;
+              });
+            },
+            icon: pageIndex == 0
+                ? const Icon(
+                    Icons.calendar_month,
+                    color: Colors.white,
+                    size: 35,
+                  )
+                : const Icon(
+                    Icons.calendar_month_outlined,
+                    color: Colors.white,
+                    size: 35,
+                  ),
+          ),
+          IconButton(
+            enableFeedback: false,
+            onPressed: () {
+              setState(() {
+                pageIndex = 1;
+              });
+            },
+            icon: pageIndex == 1
+                ? const Icon(
+                    Icons.chat_bubble_rounded,
+                    color: Colors.white,
+                    size: 35,
+                  )
+                : const Icon(
+                    Icons.chat_bubble_outline_rounded,
+                    color: Colors.white,
+                    size: 35,
+                  ),
+          ),
+          IconButton(
+            enableFeedback: false,
+            onPressed: () {
+              setState(() {
+                pageIndex = 2;
+              });
+            },
+            icon: pageIndex == 2
+                ? const Icon(
+                    Icons.person,
+                    color: Colors.white,
+                    size: 35,
+                  )
+                : const Icon(
+                    Icons.person_outline,
+                    color: Colors.white,
+                    size: 35,
+                  ),
+          ),
+          IconButton(
+            enableFeedback: false,
+            onPressed: () {
+              setState(() {
+                pageIndex = 3;
+              });
+            },
+            icon: pageIndex == 3
+                ? const Icon(
+                    Icons.book,
+                    color: Colors.white,
+                    size: 35,
+                  )
+                : const Icon(
+                    Icons.book_outlined,
+                    color: Colors.white,
+                    size: 35,
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+
+
+  
+
+
 }
