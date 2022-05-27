@@ -39,7 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
     //const Page1(),
     //const Page2(),
     //const Page3(),
-    //const Page4(),
   ];
 
 
@@ -435,12 +434,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Container buildMyNavBar(BuildContext context) {
     return Container(
-      height: 60,
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        borderRadius: const BorderRadius.only(
+      height: 50,
+      margin: const EdgeInsets.only(
+        bottom: 10,
+        left: 50,
+        right: 50,
+        ),
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 10,
+            spreadRadius: 5,
+          ),
+        ],
+        color: Color.fromARGB(255, 111, 12, 198),
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
           bottomLeft: Radius.circular(30),
@@ -448,7 +474,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
             enableFeedback: false,
@@ -460,7 +486,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: pageIndex == 0
                 ? const Icon(
                     Icons.calendar_month,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 21, 170, 234),
                     size: 35,
                   )
                 : const Icon(
@@ -479,7 +505,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: pageIndex == 1
                 ? const Icon(
                     Icons.chat_bubble_rounded,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 21, 170, 234),
                     size: 35,
                   )
                 : const Icon(
@@ -488,6 +514,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     size: 35,
                   ),
           ),
+          
           IconButton(
             enableFeedback: false,
             onPressed: () {
@@ -497,27 +524,8 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             icon: pageIndex == 2
                 ? const Icon(
-                    Icons.person,
-                    color: Colors.white,
-                    size: 35,
-                  )
-                : const Icon(
-                    Icons.person_outline,
-                    color: Colors.white,
-                    size: 35,
-                  ),
-          ),
-          IconButton(
-            enableFeedback: false,
-            onPressed: () {
-              setState(() {
-                pageIndex = 3;
-              });
-            },
-            icon: pageIndex == 3
-                ? const Icon(
                     Icons.book,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 21, 170, 234),
                     size: 35,
                   )
                 : const Icon(
