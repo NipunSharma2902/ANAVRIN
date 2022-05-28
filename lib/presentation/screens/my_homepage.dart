@@ -1,3 +1,4 @@
+import 'package:anavrin/presentation/screens/journal.dart';
 import 'package:animate_do/animate_do.dart';
 //import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
@@ -151,6 +152,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       SizedBox(
                         height: 3.h,
                       ),
+
+
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -196,6 +200,13 @@ class _MyHomePageState extends State<MyHomePage> {
                               ConnectionState.waiting) {
                             return const MyCircularIndicator();
                           }
+
+
+
+
+
+
+
 
                           return snapshot.data!.isNotEmpty
                               ? ListView.builder(
@@ -521,6 +532,9 @@ class _MyHomePageState extends State<MyHomePage> {
             enableFeedback: false,
             onPressed: () {
               setState(() {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) => new journal()),
+                    );
                 pageIndex = 2;
               });
             },

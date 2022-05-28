@@ -76,9 +76,6 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Todo App',
-            themeMode: ThemeMode.light,
-            theme: MyTheme.lightTheme,
-            darkTheme: MyTheme.darkTheme,
             onGenerateRoute: approute.generateRoute,
             home: StreamBuilder<User?>(
               stream: FirebaseAuth.instance.authStateChanges(),
