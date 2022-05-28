@@ -39,7 +39,7 @@ class OnBoardingItem extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.headline3,
           ),
           SizedBox(
             height: 2.h,

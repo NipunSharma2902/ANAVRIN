@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +37,7 @@ class WelcomePage extends StatelessWidget {
             return SafeArea(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+                    const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -43,7 +45,8 @@ class WelcomePage extends StatelessWidget {
                       duration: const Duration(milliseconds: 1500),
                       child: Image.asset(
                         MyAssets.welcomesketch,
-                        fit: BoxFit.cover,
+                        height: 200,
+                        width: 200,
                       ),
                     ),
                     SizedBox(
@@ -53,11 +56,11 @@ class WelcomePage extends StatelessWidget {
                       'Hello !',
                       style: Theme.of(context)
                           .textTheme
-                          .headline1
+                          .headline2
                           ?.copyWith(letterSpacing: 3),
                     ),
                     SizedBox(
-                      height: 2.h,
+                      height: 4.h,
                     ),
                     Text(
                       'Welcome to the best Task manager baby !',
