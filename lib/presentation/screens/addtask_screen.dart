@@ -118,7 +118,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             'Title',
             style: Theme.of(context)
                 .textTheme
-                .headline1!
+                .headline4!
                 .copyWith(fontSize: 14.sp),
           ),
           SizedBox(
@@ -140,7 +140,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             'Note',
             style: Theme.of(context)
                 .textTheme
-                .headline1!
+                .headline4!
                 .copyWith(fontSize: 14.sp),
           ),
           SizedBox(
@@ -160,7 +160,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             'Date',
             style: Theme.of(context)
                 .textTheme
-                .headline1!
+                .headline4!
                 .copyWith(fontSize: 14.sp),
           ),
           SizedBox(
@@ -190,7 +190,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       'Start Time',
                       style: Theme.of(context)
                           .textTheme
-                          .headline1!
+                          .headline4!
                           .copyWith(fontSize: 14.sp),
                     ),
                     SizedBox(
@@ -239,7 +239,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       'End Time',
                       style: Theme.of(context)
                           .textTheme
-                          .headline1!
+                          .headline4!
                           .copyWith(fontSize: 14.sp),
                     ),
                     SizedBox(
@@ -281,7 +281,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             'Reminder',
             style: Theme.of(context)
                 .textTheme
-                .headline1!
+                .headline4!
                 .copyWith(fontSize: 14.sp),
           ),
           SizedBox(
@@ -295,7 +295,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             'Colors',
             style: Theme.of(context)
                 .textTheme
-                .headline1!
+                .headline4!
                 .copyWith(fontSize: 14.sp),
           ),
           SizedBox(
@@ -392,7 +392,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       items: menuItems,
       style: Theme.of(context)
           .textTheme
-          .headline1!
+          .headline4!
           .copyWith(fontSize: 9.sp, color: Colors.deepPurple),
       icon: Icon(
         Icons.arrow_drop_down,
@@ -446,7 +446,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         ),
         Text(
           isEditMote ? 'Update Task' : 'Add Task',
-          style: Theme.of(context).textTheme.headline1,
+          style: Theme.of(context).textTheme.headline4,
         ),
         const SizedBox()
       ],

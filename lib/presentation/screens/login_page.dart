@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                         Text(
                           'Welcome !',
                           style:
-                              Theme.of(context).textTheme.headline1?.copyWith(
+                              Theme.of(context).textTheme.headline4?.copyWith(
                                     fontSize: 20.sp,
                                     letterSpacing: 2,
                                   ),
@@ -182,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                                 'Sign Up',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline1
+                                    .headline4
                                     ?.copyWith(
                                       fontSize: 9.sp,
                                       color: Colors.deepPurple,
@@ -205,7 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                               'Or',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline1
+                                  .headline4
                                   ?.copyWith(
                                     fontSize: 9.sp,
                                     color: Colors.deepPurple,
@@ -241,30 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            const SizedBox(
-                              width: 40,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(
-                                  content: Text(
-                                    'It will be added soon !!',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline1
-                                        ?.copyWith(
-                                            fontSize: 11.sp,
-                                            color: Appcolors.white),
-                                  ),
-                                  backgroundColor: Colors.deepPurple,
-                                ));
-                              },
-                              child: Image.asset(
-                                MyAssets.facebookicon,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                            
                           ],
                         ),
                       ],

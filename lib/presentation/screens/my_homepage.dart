@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline1!
+                                  .headline4!
                                   .copyWith(fontSize: 15.sp),
                             ),
                           ),
@@ -162,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             DateFormat('MMMM, dd').format(currentdate),
                             style: Theme.of(context)
                                 .textTheme
-                                .headline1!
+                                .headline4!
                                 .copyWith(fontSize: 17.sp),
                           ),
                           const Spacer(),
@@ -397,10 +397,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           SizedBox(height: 3.h),
           Text(
-            'There Is No Tasks',
+            'You\'re All Set',
             style: Theme.of(context)
                 .textTheme
-                .headline1!
+                .headline4!
                 .copyWith(fontSize: 16.sp),
           ),
         ],
@@ -417,7 +417,7 @@ class _MyHomePageState extends State<MyHomePage> {
         width: 20.w,
         initialSelectedDate: DateTime.now(),
         dateTextStyle:
-            Theme.of(context).textTheme.headline1!.copyWith(fontSize: 18.sp),
+            Theme.of(context).textTheme.headline4!.copyWith(fontSize: 18.sp),
         dayTextStyle: Theme.of(context)
             .textTheme
             .subtitle1!

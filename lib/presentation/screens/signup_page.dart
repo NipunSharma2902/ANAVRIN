@@ -259,30 +259,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            const SizedBox(
-                              width: 40,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(
-                                  content: Text(
-                                    'It will be added soon !!',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline1
-                                        ?.copyWith(
-                                            fontSize: 11.sp,
-                                            color: Appcolors.white),
-                                  ),
-                                  backgroundColor: Colors.deepPurple,
-                                ));
-                              },
-                              child: Image.asset(
-                                MyAssets.facebookicon,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                           
                           ],
                         ),
                       ],
