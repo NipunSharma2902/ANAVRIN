@@ -1,55 +1,16 @@
-import 'package:anavrin/presentation/screens/journal.dart';
 import 'package:anavrin/presentation/screens/my_homepage.dart';
-import 'package:animate_do/animate_do.dart';
 //import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:date_picker_timeline/date_picker_timeline.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sizer/sizer.dart';
-import 'package:anavrin/bloc/auth/authentication_cubit.dart';
-import 'package:anavrin/bloc/connectivity/connectivity_cubit.dart';
-import 'package:anavrin/data/models/task_model.dart';
-import 'package:anavrin/data/repositories/firestore_crud.dart';
-import 'package:anavrin/presentation/widgets/mybutton.dart';
-import 'package:anavrin/presentation/widgets/myindicator.dart';
-import 'package:anavrin/presentation/widgets/mysnackbar.dart';
-import 'package:anavrin/presentation/widgets/mytextfield.dart';
-import 'package:anavrin/presentation/widgets/task_container.dart';
-import 'package:anavrin/shared/constants/assets_path.dart';
-import 'package:anavrin/shared/constants/consts_variables.dart';
-import 'package:anavrin/shared/constants/strings.dart';
-import 'package:anavrin/shared/services/notification_service.dart';
-import 'package:anavrin/shared/styles/colors.dart';
 import 'package:anavrin/presentation/screens/my_homepage.dart';
+import 'aura_screen.dart';
 
 
 
 
 
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:anavrin/main.dart';
-import 'package:anavrin/presentation/widgets/task_container.dart';
-import 'package:anavrin/shared/constants/strings.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:anavrin/bloc/connectivity/connectivity_cubit.dart';
-import 'package:anavrin/bloc/auth/authentication_cubit.dart';
-import 'package:anavrin/presentation/widgets/myindicator.dart';
-import 'package:anavrin/presentation/widgets/mysnackbar.dart';
-import 'package:anavrin/shared/constants/consts_variables.dart';
 
 
-
- int pageIndex = 0;
-  
-  final pages = [
-    const MyHomePage(),
-    //const (),
-    journal(),
-  ];
 
 
 class journal extends StatefulWidget {
@@ -64,9 +25,9 @@ class _journalState extends State<journal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(
-          Icons.book_online,
-          color: Theme.of(context).primaryColor,
+        leading: const Icon(
+          Icons.menu_book_outlined,
+          color: Colors.white,
         ),
 
         title: const Text(
@@ -124,18 +85,12 @@ class _journalState extends State<journal> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => MyHomePage()),
                     );
-                pageIndex = 0;
+               
               });
             },
-            icon: pageIndex == 0
-                ? const Icon(
+            icon: const Icon(
                     Icons.calendar_month,
                     color: Colors.white,
-                    size: 35,
-                  )
-                : const Icon(
-                    Icons.calendar_month_outlined,
-                    color: Color.fromARGB(255, 21, 170, 234),
                     size: 35,
                   ),
           ),
@@ -143,16 +98,13 @@ class _journalState extends State<journal> {
             enableFeedback: false,
             onPressed: () {
               setState(() {
-                pageIndex = 1;
-              });
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => aura()),                
+                  );            
+                }
+              );
             },
-            icon: pageIndex == 1
-                ? const Icon(
-                    Icons.chat_bubble_rounded,
-                    color: Color.fromARGB(255, 21, 170, 234),
-                    size: 35,
-                  )
-                : const Icon(
+            icon: const Icon(
                     Icons.chat_bubble_outline_rounded,
                     color: Colors.white,
                     size: 35,
@@ -163,18 +115,9 @@ class _journalState extends State<journal> {
             enableFeedback: false,
             
             onPressed: () {
-              setState(() {
-                
-                pageIndex = 2;
-              });
+              setState(() {});
             },
-            icon: pageIndex == 2
-                ? const Icon(
-                    Icons.book,
-                    color: Colors.white,
-                    size: 35,
-                  )
-                : const Icon(
+            icon: const Icon(
                     Icons.book_outlined,
                     color: Color.fromARGB(255, 21, 170, 234),
                     size: 35,

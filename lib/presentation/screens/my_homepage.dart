@@ -1,6 +1,6 @@
 import 'package:anavrin/presentation/screens/journal.dart';
 import 'package:animate_do/animate_do.dart';
-//import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +22,7 @@ import 'package:anavrin/shared/constants/consts_variables.dart';
 import 'package:anavrin/shared/constants/strings.dart';
 import 'package:anavrin/shared/services/notification_service.dart';
 import 'package:anavrin/shared/styles/colors.dart';
-
-import 'package:anavrin/page2.dart';
+import 'aura_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -36,13 +35,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static var currentdate = DateTime.now();
 
-  int pageIndex = 0;
-  
-  final pages = [
-    //const Page1(),
-    const Page2(),
-    //const Page3(),
-  ];
 
 
   final TextEditingController _usercontroller = TextEditingController(
@@ -492,19 +484,11 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             enableFeedback: false,
             onPressed: () {
-              setState(() {
-                pageIndex = 0;
-              });
+              setState(() {});
             },
-            icon: pageIndex == 0
-                ? const Icon(
+            icon: const Icon(
                     Icons.calendar_month,
                     color: Color.fromARGB(255, 21, 170, 234),
-                    size: 35,
-                  )
-                : const Icon(
-                    Icons.calendar_month_outlined,
-                    color: Colors.white,
                     size: 35,
                   ),
           ),
@@ -512,16 +496,12 @@ class _MyHomePageState extends State<MyHomePage> {
             enableFeedback: false,
             onPressed: () {
               setState(() {
-                pageIndex = 1;
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => aura()),
+                    );
               });
             },
-            icon: pageIndex == 1
-                ? const Icon(
-                    Icons.chat_bubble_rounded,
-                    color: Color.fromARGB(255, 21, 170, 234),
-                    size: 35,
-                  )
-                : const Icon(
+            icon: const Icon(
                     Icons.chat_bubble_outline_rounded,
                     color: Colors.white,
                     size: 35,
@@ -533,18 +513,11 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               setState(() {
                 Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) => new journal()),
-                    );
-                pageIndex = 2;
+                    MaterialPageRoute(builder: (context) => journal()),
+                    );              
               });
             },
-            icon: pageIndex == 2
-                ? const Icon(
-                    Icons.book,
-                    color: Color.fromARGB(255, 21, 170, 234),
-                    size: 35,
-                  )
-                : const Icon(
+            icon: const Icon(
                     Icons.book_outlined,
                     color: Colors.white,
                     size: 35,
