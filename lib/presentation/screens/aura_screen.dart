@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:anavrin/presentation/widgets/mytextfield.dart';
@@ -13,81 +15,82 @@ class _auraState extends State<aura> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF5B61B9),
       appBar: AppBar(
-        leading: const Icon(
-          Icons.person,
-          color: Colors.white,
-        ),
-
-        title: const Text(
-          "Aura Is Here!",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-          ),
-        ),
-        centerTitle: true,
+        automaticallyImplyLeading: false,
+        backgroundColor: Color(0xFF5B61B9),
+        title: buildTitleWidget(context),
+        elevation: 0,
       ),
-        bottomNavigationBar: buildMyNavBar(context),
-      );
+      bottomNavigationBar: buildChatInputWidget(context),
+    );
   }
+}
 
-    
-  Container buildMyNavBar(BuildContext context) {
-    return Container(
-      height: 50,
-      margin: const EdgeInsets.only(
-        bottom: 10,
-        left: 50,
-        right: 50,
-        ),
-      decoration: const BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 10,
-            spreadRadius: 5,
+Widget buildTitleWidget(BuildContext context) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      InkWell(
+        onTap: () => Navigator.of(context).pop(),
+        child: const Text(
+          "Back",
+          style: TextStyle(
+            fontSize: 16,
+            fontFamily: 'Metropolis Regular',
+            fontWeight: FontWeight.w400,
+            color: Colors.white54,
           ),
-        ],
-        color: Color.fromARGB(255, 111, 12, 198),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-          bottomLeft: Radius.circular(30),
-          bottomRight: Radius.circular(30),
         ),
+      ),
+    ],
+  );
+}
+
+Widget buildChatInputWidget(BuildContext context) {
+  return Container(
+    padding: const EdgeInsets.symmetric(
+      horizontal: 12,
+      vertical: 18,
+    ),
+    color: Colors.white,
+    child: Container(
+      padding: const EdgeInsets.only(
+        left: 20,
+      ),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF7F7F8),
+        borderRadius: BorderRadius.circular(40),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [     
-
-      
-   
-          IconButton(
-            enableFeedback: false,
-            
-            onPressed: () {
-              setState(() {
-                
-
-
-
-                //WE CAN PUT THE POST COMMANDS HERE
-
-
-
-              });
-            },
-            icon: const Icon(
-                    Icons.send,
-                    color: Colors.white,
-                    size: 35,
-                  ),
+        children: [
+          Expanded(
+            child: TextField(
+              onChanged: (value) {
+                // TODO:
+              },
+              decoration: const InputDecoration.collapsed(
+                hintText: "Type your message...",
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFF5B61B9),
+              ),
+              child: const Icon(
+                Icons.send_rounded,
+                color: Colors.white,
+                size: 24,
+              ),
+            ),
           ),
         ],
       ),
-    );
-
-
-  }
+    ),
+  );
 }
