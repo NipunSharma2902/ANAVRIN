@@ -22,6 +22,8 @@ import 'package:anavrin/shared/constants/strings.dart';
 import 'package:anavrin/shared/services/notification_service.dart';
 import 'package:anavrin/shared/styles/colors.dart';
 
+import 'package:anavrin/page2.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -37,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   
   final pages = [
     //const Page1(),
-    //const Page2(),
+    const Page2(),
     //const Page3(),
   ];
 
@@ -538,9 +540,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-
-
 
   
 
