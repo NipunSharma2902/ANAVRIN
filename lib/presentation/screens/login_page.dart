@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                           height: 4.h,
                         ),
                         MyButton(
-                          color: Colors.deepPurple,
+                          color: Color(0xFF5B61B9),
                           width: 80.w,
                           title: 'Login',
                           func: () {
@@ -185,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                                     .headline4
                                     ?.copyWith(
                                       fontSize: 9.sp,
-                                      color: Colors.deepPurple,
+                                      color: Color(0xFF5B61B9),
                                     ),
                               ),
                             ),
@@ -208,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                                   .headline4
                                   ?.copyWith(
                                     fontSize: 9.sp,
-                                    color: Colors.deepPurple,
+                                    color: Color(0xFF5B61B9),
                                   ),
                             ),
                             const SizedBox(
@@ -241,7 +241,6 @@ class _LoginPageState extends State<LoginPage> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            
                           ],
                         ),
                       ],

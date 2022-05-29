@@ -23,6 +23,7 @@ import 'package:anavrin/shared/constants/strings.dart';
 import 'package:anavrin/shared/services/notification_service.dart';
 import 'package:anavrin/shared/styles/colors.dart';
 import 'aura_screen.dart';
+import 'addjournal_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -153,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         const Spacer(),
                         MyButton(
-                          color: Colors.deepPurple,
+                          color: Color(0xFF5B61B9),
                           width: 40.w,
                           title: '+ Add Task',
                           func: () {
@@ -280,7 +281,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       child: profileimagesindex == index
                                           ? Icon(
                                               Icons.done,
-                                              color: Colors.deepPurple,
+                                              color: Color(0xFF5B61B9),
                                               size: 8.h,
                                             )
                                           : null),
@@ -404,7 +405,7 @@ class _MyHomePageState extends State<MyHomePage> {
             .textTheme
             .subtitle1!
             .copyWith(fontSize: 10.sp, color: Appcolors.black),
-        selectionColor: Colors.deepPurple,
+        selectionColor: Color(0xFF5B61B9),
         onDateChange: (DateTime newdate) {
           setState(() {
             currentdate = newdate;
@@ -437,7 +438,7 @@ class _MyHomePageState extends State<MyHomePage> {
             spreadRadius: 5,
           ),
         ],
-        color: Color.fromARGB(255, 111, 12, 198),
+        color: Color(0xFF5B61B9),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),

@@ -56,20 +56,20 @@ class MyTextfield extends StatelessWidget {
               EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.3.h),
           hintStyle: Theme.of(context).textTheme.headline1?.copyWith(
                 fontSize: 9.sp,
-                color: Colors.deepPurple,
+                color: Color(0xFF5B61B9),
               ),
           prefixIcon: showicon
               ? Icon(
                   icon,
                   size: 22,
-                  color: Colors.deepPurple,
+                  color: Color(0xFF5B61B9),
                 )
               : null,
           suffixIcon: readonly
               ? Icon(
                   icon,
                   size: 22,
-                  color: Colors.deepPurple,
+                  color: Color(0xFF5B61B9),
                 )
               : null),
       autovalidateMode: AutovalidateMode.onUserInteraction,

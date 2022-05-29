@@ -158,7 +158,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 4.h,
                         ),
                         MyButton(
-                          color: Colors.deepPurple,
+                          color: Color(0xFF5B61B9),
                           width: 80.w,
                           title: 'Sign Up',
                           func: () {
@@ -203,7 +203,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     .headline1
                                     ?.copyWith(
                                       fontSize: 9.sp,
-                                      color: Colors.deepPurple,
+                                      color: Color(0xFF5B61B9),
                                     ),
                               ),
                             ),
@@ -226,7 +226,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   .headline1
                                   ?.copyWith(
                                     fontSize: 9.sp,
-                                    color: Colors.deepPurple,
+                                    color: Color(0xFF5B61B9),
                                   ),
                             ),
                             const SizedBox(
@@ -259,7 +259,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                           
                           ],
                         ),
                       ],
