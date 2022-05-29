@@ -171,13 +171,26 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                         ],
                       ),
-                      SizedBox(
+                        SizedBox(
                         height: 3.h,
                       ),
                       _buildDatePicker(context, connectivitycubit),
                       SizedBox(
                         height: 4.h,
                       ),
+
+
+
+
+
+
+
+//For the Dynamic Reminder display part
+
+
+
+
+                    
                       Expanded(
                           child: StreamBuilder(
                         stream: FireStoreCrud().getTasks(
@@ -192,14 +205,6 @@ class _MyHomePageState extends State<MyHomePage> {
                               ConnectionState.waiting) {
                             return const MyCircularIndicator();
                           }
-
-
-
-
-
-
-
-
                           return snapshot.data!.isNotEmpty
                               ? ListView.builder(
                                   physics: const BouncingScrollPhysics(),
