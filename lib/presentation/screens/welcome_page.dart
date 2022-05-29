@@ -73,7 +73,7 @@ class WelcomePage extends StatelessWidget {
                       height: 4.h,
                     ),
                     MyButton(
-                      color: Colors.deepPurple,
+                      color: Color(0xFF5B61B9),
                       width: 80.w,
                       title: 'Login',
                       func: () {
@@ -84,7 +84,7 @@ class WelcomePage extends StatelessWidget {
                       height: 2.h,
                     ),
                     MyButton(
-                      color: Colors.deepPurple,
+                      color: Color(0xFF5B61B9),
                       width: 80.w,
                       title: 'Sign Up',
                       func: () {
@@ -112,7 +112,7 @@ class WelcomePage extends StatelessWidget {
       width: 80.w,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(200),
-          border: Border.all(color: Colors.deepPurple, width: 2)),
+          border: Border.all(color: Color(0xFF5B61B9), width: 2)),
       child: MaterialButton(
         onPressed: () {
           if (connectivityCubit.state is ConnectivityOnlineState) {
@@ -129,7 +129,7 @@ class WelcomePage extends StatelessWidget {
             'Register Later',
             style: Theme.of(context).textTheme.headline1?.copyWith(
                   fontSize: 11.sp,
-                  color: Colors.deepPurple,
+                  color: Color(0xFF5B61B9),
                 ),
           ),
         ),

@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'package:anavrin/data/models/task_model.dart';
+import 'package:anavrin/presentation/screens/addjournal_screen.dart';
 import 'package:anavrin/presentation/screens/my_homepage.dart';
 import 'package:anavrin/presentation/widgets/myindicator.dart';
 import 'package:anavrin/shared/constants/assets_path.dart';
@@ -24,89 +25,64 @@ class _journalState extends State<journal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(
-          Icons.menu_book_outlined,
-          color: Color.fromARGB(255, 255, 255, 255),
-        ),
-        title: const Text(
-          "Journal Mode",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-          ),
-        ),
-        centerTitle: true,
+        automaticallyImplyLeading: false,
+        backgroundColor: Color(0xFF5B61B9),
+        title: buildTitleWidget(context),
+        elevation: 0,
       ),
-        //body: pages[pageIndex],
-        body:Column(children: [
-
-
-
-
-                        Expanded(
-                          child: StreamBuilder(
-                        stream: FireStoreCrud().getTasks(mydate: 'currentdate',
-                        ),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<List<TaskModel>> snapshot) {
-                          if (snapshot.hasError) {
-                            return _nodatawidget();
-                          }
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const MyCircularIndicator();
-                          }
-                          return snapshot.data!.isNotEmpty
-                              ? ListView.builder(
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: snapshot.data!.length,
-                                  itemBuilder: (context, index) {
-                                    var task = snapshot.data![index];
-                                    Widget _taskcontainer = TaskContainer(
-                                      id: task.id,
-                                      color: colors[task.colorindex],
-                                      title: task.title,
-                                      starttime: task.starttime,
-                                      endtime: task.endtime,
-                                      note: task.note,
-                                    );
-                                    return InkWell(
-                                        onTap: () {},
-                                        child: index % 2 == 0
-                                            ? BounceInLeft(
-                                                duration: const Duration(
-                                                    milliseconds: 1000),
-                                                child: _taskcontainer)
-                                            : BounceInRight(
-                                                duration: const Duration(
-                                                    milliseconds: 1000),
-                                                child: _taskcontainer));
-                                  },
-                                )
-                              : _nodatawidget();
-                        },
-                      )),
-
-
-          ],
-        ),
-        bottomNavigationBar: buildMyNavBar(context),
-      );
-            
+      //body: pages[pageIndex],
+      body: Column(
+        children: [
+          Expanded(
+              child: StreamBuilder(
+            stream: FireStoreCrud().getTasks(
+              mydate: 'currentdate',
+            ),
+            builder: (BuildContext context,
+                AsyncSnapshot<List<TaskModel>> snapshot) {
+              if (snapshot.hasError) {
+                return _nodatawidget();
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const MyCircularIndicator();
+              }
+              return snapshot.data!.isNotEmpty
+                  ? ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        var task = snapshot.data![index];
+                        Widget _taskcontainer = TaskContainer(
+                          id: task.id,
+                          color: colors[task.colorindex],
+                          title: task.title,
+                          starttime: task.starttime,
+                          endtime: task.endtime,
+                          note: task.note,
+                        );
+                        return InkWell(
+                            onTap: () {},
+                            child: index % 2 == 0
+                                ? BounceInLeft(
+                                    duration:
+                                        const Duration(milliseconds: 1000),
+                                    child: _taskcontainer)
+                                : BounceInRight(
+                                    duration:
+                                        const Duration(milliseconds: 1000),
+                                    child: _taskcontainer));
+                      },
+                    )
+                  : _nodatawidget();
+            },
+          )),
+        ],
+      ),
+      bottomNavigationBar: buildMyNavBar(context),
+    );
   }
 
-
-
-
-
-
-
-
-
-
-
-
-Widget _nodatawidget() {
+  Widget _nodatawidget() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -127,7 +103,7 @@ Widget _nodatawidget() {
         ],
       ),
     );
-}
+  }
 
   Container buildMyNavBar(BuildContext context) {
     return Container(
@@ -145,7 +121,7 @@ Widget _nodatawidget() {
             spreadRadius: 5,
           ),
         ],
-        color: Color.fromARGB(255, 111, 12, 198),
+        color: Color(0xFF5B61B9),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
@@ -203,4 +179,37 @@ Widget _nodatawidget() {
       ),
     );
   }
+}
+
+Widget buildTitleWidget(BuildContext context) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      InkWell(
+        onTap: () => Navigator.of(context).pop(),
+        child: const Text(
+          "Back",
+          style: TextStyle(
+            fontSize: 16,
+            fontFamily: 'Metropolis Regular',
+            fontWeight: FontWeight.w400,
+            color: Colors.white54,
+          ),
+        ),
+      ),
+      InkWell(
+        onTap: () => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => addjournal_screen())),
+        child: const Text(
+          "Add",
+          style: TextStyle(
+            fontSize: 16,
+            fontFamily: 'Metropolis Regular',
+            fontWeight: FontWeight.w400,
+            color: Colors.white54,
+          ),
+        ),
+      ),
+    ],
+  );
 }

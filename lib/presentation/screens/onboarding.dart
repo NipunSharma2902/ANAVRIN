@@ -36,7 +36,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: Color(0xFF5B61B9),
       body: BlocConsumer<OnboardingCubit, OnboardingState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -50,7 +50,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   Container(
                       width: 100.w,
                       height: 95.h,
-                      color: Colors.deepPurple,
+                      color: Color(0xFF5B61B9),
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 10.w,
@@ -126,7 +126,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           child: Padding(
                             padding: const EdgeInsets.all(20),
                             child: MyButton(
-                                color: Colors.deepPurple,
+                                color: Color(0xFF5B61B9),
                                 width: 19.w,
                                 title: 'Skip',
                                 func: () {

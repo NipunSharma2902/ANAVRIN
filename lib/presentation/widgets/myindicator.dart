@@ -7,7 +7,7 @@ class MyCircularIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: CircularProgressIndicator(
-        color: Colors.deepPurple,
+        color: Color(0xFF5B61B9),
       ),
     );
   }
