@@ -1,11 +1,12 @@
 // ignore_for_file: unused_element
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:anavrin/presentation/widgets/mytextfield.dart';
 
 class aura extends StatefulWidget {
-  aura({Key? key}) : super(key: key);
+  aura({Key? key, user}) : super(key: key);
 
   @override
   State<aura> createState() => _auraState();
@@ -22,7 +23,12 @@ class _auraState extends State<aura> {
         title: buildTitleWidget(context),
         elevation: 0,
       ),
-      bottomNavigationBar: buildChatInputWidget(context),
+      body: Column(
+        children: [
+          buildContactInformationWidget(),
+          buildChatInputWidget(context),
+        ],
+      ),
     );
   }
 }
@@ -91,6 +97,37 @@ Widget buildChatInputWidget(BuildContext context) {
           ),
         ],
       ),
+    ),
+  );
+}
+
+Widget buildContactInformationWidget() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(
+      vertical: 32,
+      horizontal: 16,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 24.0),
+          child: SizedBox(
+            width: 200.0,
+            child: const Text(
+              "AURORA",
+              style: const TextStyle(
+                fontSize: 32,
+                fontFamily: 'Metropolis Black',
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                wordSpacing: 1.1,
+                letterSpacing: 1.1,
+              ),
+            ),
+          ),
+        ),
+      ],
     ),
   );
 }
