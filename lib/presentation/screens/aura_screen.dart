@@ -14,14 +14,14 @@ import 'package:anavrin/presentation/widgets/mytextfield.dart';
 
 
 
-Future<Album> createAlbum(String title) async {
+Future<Album> createAlbum(String question) async {
   final response = await http.post(
-    Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+    Uri.parse('https://chatbot-aurora.herokuapp.com/chatbot'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, String>{
-      'title': title,
+      'question': question,
     }),
   );
 

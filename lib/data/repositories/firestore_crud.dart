@@ -75,7 +75,7 @@ Stream<List<NoteModel>> getNote() {
       note,
       docid,
       colorindex}) async {
-    var Notecollection = _firestore.collection('note');
+    var Notecollection = _firestore.collection('notes');
     await Notecollection.doc(docid).update({
       'title': title,
       'note': note,
@@ -84,8 +84,8 @@ Stream<List<NoteModel>> getNote() {
   }
 
   Future<void> deleteNote({required String docid}) async {
-    var notecollection = _firestore.collection('note');
-    await notecollection.doc(docid).delete();
+    var Notecollection = _firestore.collection('notes');
+    await Notecollection.doc(docid).delete();
   }
 
 
