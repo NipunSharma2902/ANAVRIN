@@ -249,7 +249,7 @@ class Textfield extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
-      maxLines: 25,
+      maxLines: 24,
       maxLength: 4000,
       readOnly: readonly,
       obscureText: obscure,
