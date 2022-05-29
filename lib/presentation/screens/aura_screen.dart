@@ -8,51 +8,36 @@ import 'package:sizer/sizer.dart';
 import 'package:anavrin/presentation/widgets/mytextfield.dart';
 
 
+final Map<String, dynamic> _question={
+  "question": "Hello guys"
+};
 
 
 
-
-
-
-Future<Album> createAlbum(String question) async {
+Future<Reply> createReply(String question) async {
   final response = await http.post(
-    Uri.parse('https://chatbot-aurora.herokuapp.com/chatbot'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(<String, String>{
-      'question': question,
-    }),
+    Uri.parse('https://chatbot-aurora.herokuapp.com/chatbot?question='+_question["question"],),
   );
 
-  if (response.statusCode == 201) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-    return Album.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
-    throw Exception('Failed to create album.');
-  }
+    return Reply.fromJson(jsonDecode(response.body));
 }
 
-class Album {
-  final int id;
-  final String title;
+class Reply {
+  final String reply;
 
-  const Album({required this.id, required this.title});
+  const Reply({required this.reply});
 
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      id: json['id'],
-      title: json['title'],
+  factory Reply.fromJson(Map<String, dynamic> json) {
+    return Reply(
+      reply: json['response'],
     );
   }
 }
 
 
 
-
+final TextEditingController _controller = TextEditingController();
+  Future<Reply>? _futureReply;
 
 
 
@@ -69,6 +54,9 @@ class aura extends StatefulWidget {
 }
 
 class _auraState extends State<aura> {
+  
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,12 +70,32 @@ class _auraState extends State<aura> {
       body: Column(
         children: [
           buildContactInformationWidget(),
+          buildFutureBuilder(),
         ],
       ),
-      bottomNavigationBar: buildChatInputWidget(context),
+      bottomNavigationBar:buildChatInputWidget(context),
+        
     );
   }
+  FutureBuilder<Reply> buildFutureBuilder() {
+  return FutureBuilder<Reply>(
+      future: _futureReply,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!.reply);
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
+    );
 }
+}
+
+
+
+
 
 Widget buildTitleWidget(BuildContext context) {
   return Row(
@@ -139,18 +147,15 @@ Widget buildChatInputWidget(BuildContext context) {
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(0xFF5B61B9),
-              ),
-              child: const Icon(
-                Icons.send_rounded,
-                color: Colors.white,
-                size: 24,
-              ),
-            ),
+            child: ElevatedButton(
+          onPressed: () {
+            if (_controller.text == null) {
+              _controller.text=='Hello';
+            }
+            _futureReply = createReply(_controller.text);
+          },
+          child: const Text('Send'),
+        ),
           ),
         ],
       ),
@@ -187,4 +192,9 @@ Widget buildContactInformationWidget() {
       ],
     ),
   );
+
+
+
+
+
 }
