@@ -12,15 +12,7 @@ import '../../data/repositories/firestore_crud.dart';
 import '../../shared/constants/consts_variables.dart';
 import '../widgets/task_container.dart';
 import 'aura_screen.dart';
-
-
-
-
-
 import 'package:flutter/material.dart';
-
-
-
 
 class journal extends StatefulWidget {
   journal({Key? key}) : super(key: key);
@@ -38,7 +30,6 @@ class _journalState extends State<journal> {
           Icons.menu_book_outlined,
           color: Color.fromARGB(255, 255, 255, 255),
         ),
-
         title: const Text(
           "Journal Mode",
           style: TextStyle(
@@ -48,6 +39,7 @@ class _journalState extends State<journal> {
         ),
         centerTitle: true,
       ),
+<<<<<<< HEAD
         //body: pages[pageIndex],
         body:Column(children: [
 
@@ -149,6 +141,13 @@ Widget _nodatawidget() {
 
 
 
+=======
+      //body: pages[pageIndex],
+      bottomNavigationBar: buildMyNavBar(context),
+    );
+  }
+
+>>>>>>> 2dd5f69b4b626b7e1cd93ecfbe4e71285abaa126
   Container buildMyNavBar(BuildContext context) {
     return Container(
       height: 50,
@@ -156,7 +155,7 @@ Widget _nodatawidget() {
         bottom: 10,
         left: 50,
         right: 50,
-        ),
+      ),
       decoration: const BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -180,58 +179,47 @@ Widget _nodatawidget() {
             enableFeedback: false,
             onPressed: () {
               setState(() {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MyHomePage()),
-                    );
-               
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
               });
             },
             icon: const Icon(
-                    Icons.calendar_month,
-                    color: Colors.white,
-                    size: 35,
-                  ),
+              Icons.calendar_month,
+              color: Colors.white,
+              size: 35,
+            ),
           ),
           IconButton(
             enableFeedback: false,
             onPressed: () {
               setState(() {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => aura()),                
-                  );            
-                }
-              );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => aura()),
+                );
+              });
             },
             icon: const Icon(
-                    Icons.chat_bubble_outline_rounded,
-                    color: Colors.white,
-                    size: 35,
-                  ),
+              Icons.chat_bubble_outline_rounded,
+              color: Colors.white,
+              size: 35,
+            ),
           ),
-          
           IconButton(
             enableFeedback: false,
-            
             onPressed: () {
               setState(() {});
             },
             icon: const Icon(
-                    Icons.book_outlined,
-                    color: Color.fromARGB(255, 21, 170, 234),
-                    size: 35,
-                  ),
+              Icons.book_outlined,
+              color: Color.fromARGB(255, 21, 170, 234),
+              size: 35,
+            ),
           ),
         ],
       ),
     );
   }
-
-  
-
-
 }
-
-
-
-      
-            
