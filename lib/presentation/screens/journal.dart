@@ -39,7 +39,6 @@ class _journalState extends State<journal> {
         ),
         centerTitle: true,
       ),
-<<<<<<< HEAD
         //body: pages[pageIndex],
         body:Column(children: [
 
@@ -130,24 +129,8 @@ Widget _nodatawidget() {
         ],
       ),
     );
-  }
+}
 
-
-
-
-
-
-
-
-
-
-=======
-      //body: pages[pageIndex],
-      bottomNavigationBar: buildMyNavBar(context),
-    );
-  }
-
->>>>>>> 2dd5f69b4b626b7e1cd93ecfbe4e71285abaa126
   Container buildMyNavBar(BuildContext context) {
     return Container(
       height: 50,

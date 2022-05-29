@@ -125,100 +125,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 .headline4!
                                 .copyWith(fontSize: 15.sp),
                           ),
-<<<<<<< HEAD
-                          const Spacer(),
-                          MyButton(
-                            color: Colors.deepPurple,
-                            width: 40.w,
-                            title: '+ Add Task',
-                            func: () {
-                              Navigator.pushNamed(
-                                context,
-                                addtaskpage,
-                              );
-                            },
-                          )
-                        ],
-                      ),
-                        SizedBox(
-                        height: 3.h,
-                      ),
-                      _buildDatePicker(context, connectivitycubit),
-                      SizedBox(
-                        height: 4.h,
-                      ),
-
-
-
-
-
-
-
-//For the Dynamic Reminder display part
-
-
-
-
-                    
-                      Expanded(
-                          child: StreamBuilder(
-                        stream: FireStoreCrud().getTasks(
-                          mydate: DateFormat('yyyy-MM-dd').format(currentdate),
-                        ),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<List<TaskModel>> snapshot) {
-                          if (snapshot.hasError) {
-                            return _nodatawidget();
-                          }
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const MyCircularIndicator();
-                          }
-                          return snapshot.data!.isNotEmpty
-                              ? ListView.builder(
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: snapshot.data!.length,
-                                  itemBuilder: (context, index) {
-                                    var task = snapshot.data![index];
-                                    Widget _taskcontainer = TaskContainer(
-                                      id: task.id,
-                                      color: colors[task.colorindex],
-                                      title: task.title,
-                                      starttime: task.starttime,
-                                      endtime: task.endtime,
-                                      note: task.note,
-                                    );
-                                    return InkWell(
-                                        onTap: () {
-                                          Navigator.pushNamed(
-                                              context, addtaskpage,
-                                              arguments: task);
-                                        },
-                                        child: index % 2 == 0
-                                            ? BounceInLeft(
-                                                duration: const Duration(
-                                                    milliseconds: 1000),
-                                                child: _taskcontainer)
-                                            : BounceInRight(
-                                                duration: const Duration(
-                                                    milliseconds: 1000),
-                                                child: _taskcontainer));
-                                  },
-                                )
-                              : _nodatawidget();
-                        },
-                      )),
-                    ],
-                  ),
-                ));
-              },
-            )),
-            
-
-
-            bottomNavigationBar: buildMyNavBar(context),
-            );
-=======
                         ),
                         InkWell(
                           onTap: () {
@@ -322,7 +228,6 @@ class _MyHomePageState extends State<MyHomePage> {
           )),
       bottomNavigationBar: buildMyNavBar(context),
     );
->>>>>>> 2dd5f69b4b626b7e1cd93ecfbe4e71285abaa126
   }
 
   Future<dynamic> _showBottomSheet(
