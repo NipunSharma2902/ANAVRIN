@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:anavrin/data/models/task_model.dart';
+import 'package:anavrin/data/models/note_model.dart';
 
 class FireStoreCrud {
   FireStoreCrud();
@@ -46,4 +47,49 @@ class FireStoreCrud {
     var taskcollection = _firestore.collection('tasks');
     await taskcollection.doc(docid).delete();
   }
+
+
+
+
+
+
+
+
+
+Future<void> addNote({required NoteModel note}) async {
+    var notecollection = _firestore.collection('notes');
+    await notecollection.add(note.tojson());
+ }
+
+Stream<List<NoteModel>> getNote() {
+    return _firestore
+        .collection('notes')
+        .snapshots(includeMetadataChanges: true)
+        .map((snapshor) => snapshor.docs
+            .map((doc) => NoteModel.fromjson(doc.data(), doc.id))
+            .toList());
+  }
+
+  Future<void> updateNote(
+      {required String title,
+      note,
+      docid,
+      colorindex}) async {
+    var Notecollection = _firestore.collection('note');
+    await Notecollection.doc(docid).update({
+      'title': title,
+      'note': note,
+      'colorindex': colorindex,
+    });
+  }
+
+  Future<void> deleteNote({required String docid}) async {
+    var notecollection = _firestore.collection('note');
+    await notecollection.doc(docid).delete();
+  }
+
+
+
+
+
 }

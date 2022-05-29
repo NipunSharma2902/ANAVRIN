@@ -1,83 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:day_night_time_picker/day_night_time_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
-import 'package:anavrin/data/models/task_model.dart';
+import 'package:anavrin/data/models/note_model.dart';
 import 'package:anavrin/data/repositories/firestore_crud.dart';
 import 'package:anavrin/presentation/widgets/mybutton.dart';
 import 'package:anavrin/presentation/widgets/mytextfield.dart';
 import 'package:anavrin/shared/constants/consts_variables.dart';
 import 'package:anavrin/shared/styles/colors.dart';
 
-import '../../shared/services/notification_service.dart';
 
-class addjournal_screen extends StatefulWidget {
-  final TaskModel? task;
 
-  const addjournal_screen({
-    this.task,
+
+// ignore: camel_case_types
+class Addjournal_screen extends StatefulWidget {
+  final NoteModel? note;
+
+  const Addjournal_screen({
+    this.note,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<addjournal_screen> createState() => _AddJournalScreenState();
+  State<Addjournal_screen> createState() => AddJournalScreenState();
 }
 
-class _AddJournalScreenState extends State<addjournal_screen> {
-  get isEditMote => widget.task != null;
+class AddJournalScreenState extends State<Addjournal_screen> {
+  get isEditMote => widget.note != null;
 
   late TextEditingController _titlecontroller;
   late TextEditingController _notecontroller;
-  late DateTime currentdate;
-  static var _starthour = TimeOfDay.now();
 
-  var endhour = TimeOfDay.now();
 
   final _formKey = GlobalKey<FormState>();
-  late int _selectedReminder;
   late int _selectedcolor;
 
-  List<DropdownMenuItem<int>> menuItems = const [
-    DropdownMenuItem(
-        child: Text(
-          "5 Min Earlier",
-        ),
-        value: 5),
-    DropdownMenuItem(
-        child: Text(
-          "10 Min Earlier",
-        ),
-        value: 10),
-    DropdownMenuItem(
-        child: Text(
-          "15 Min Earlier",
-        ),
-        value: 15),
-    DropdownMenuItem(
-        child: Text(
-          "20 Min Earlier",
-        ),
-        value: 20),
-  ];
-
+  
   @override
   void initState() {
     super.initState();
     _titlecontroller =
-        TextEditingController(text: isEditMote ? widget.task!.title : '');
+        TextEditingController(text: isEditMote ? widget.note!.title : '');
     _notecontroller =
-        TextEditingController(text: isEditMote ? widget.task!.note : '');
-
-    currentdate =
-        isEditMote ? DateTime.parse(widget.task!.date) : DateTime.now();
-    endhour = TimeOfDay(
-      hour: _starthour.hour + 1,
-      minute: _starthour.minute,
-    );
-    _selectedReminder = isEditMote ? widget.task!.reminder : 5;
-    _selectedcolor = isEditMote ? widget.task!.colorindex : 0;
+        TextEditingController(text: isEditMote ? widget.note!.note : '');
+    _selectedcolor = isEditMote ? widget.note!.colorindex : 0;
   }
 
   @override
@@ -151,153 +115,14 @@ class _AddJournalScreenState extends State<addjournal_screen> {
             hint: 'Enter Note',
             icon: Icons.ac_unit,
             showicon: false,
-            maxlenght: 40,
+            maxlenght: 400,
             validator: (value) {
               return value!.isEmpty ? "Please Enter A Note" : null;
             },
             textEditingController: _notecontroller,
           ),
-          Text(
-            'Date',
-            style: Theme.of(context)
-                .textTheme
-                .headline4!
-                .copyWith(fontSize: 14.sp),
-          ),
-          SizedBox(
-            height: 1.h,
-          ),
-          MyTextfield(
-            hint: DateFormat('dd/MM/yyyy').format(currentdate),
-            icon: Icons.calendar_today,
-            readonly: true,
-            showicon: false,
-            validator: (value) {
-              return null;
-            },
-            ontap: () {
-              _showdatepicker();
-            },
-            textEditingController: TextEditingController(),
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Start Time',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline4!
-                          .copyWith(fontSize: 14.sp),
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    MyTextfield(
-                      hint: DateFormat('HH:mm a').format(DateTime(
-                          0, 0, 0, _starthour.hour, _starthour.minute)),
-                      icon: Icons.watch_outlined,
-                      showicon: false,
-                      readonly: true,
-                      validator: (value) {
-                        return null;
-                      },
-                      ontap: () {
-                        Navigator.push(
-                            context,
-                            showPicker(
-                              value: _starthour,
-                              is24HrFormat: true,
-                              accentColor: Colors.deepPurple,
-                              onChange: (TimeOfDay newvalue) {
-                                setState(() {
-                                  _starthour = newvalue;
-                                  endhour = TimeOfDay(
-                                    hour: _starthour.hour < 22
-                                        ? _starthour.hour + 1
-                                        : _starthour.hour,
-                                    minute: _starthour.minute,
-                                  );
-                                });
-                              },
-                            ));
-                      },
-                      textEditingController: TextEditingController(),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: 4.w,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'End Time',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline4!
-                          .copyWith(fontSize: 14.sp),
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    MyTextfield(
-                      hint: DateFormat('HH:mm a').format(
-                          DateTime(0, 0, 0, endhour.hour, endhour.minute)),
-                      icon: Icons.watch,
-                      showicon: false,
-                      readonly: true,
-                      validator: (value) {
-                        return null;
-                      },
-                      ontap: () {
-                        Navigator.push(
-                            context,
-                            showPicker(
-                              value: endhour,
-                              is24HrFormat: true,
-                              minHour: _starthour.hour.toDouble() - 1,
-                              accentColor: Color(0xFF5B61B9),
-                              onChange: (TimeOfDay newvalue) {
-                                setState(() {
-                                  endhour = newvalue;
-                                });
-                              },
-                            ));
-                      },
-                      textEditingController: TextEditingController(),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Text(
-            'Reminder',
-            style: Theme.of(context)
-                .textTheme
-                .headline4!
-                .copyWith(fontSize: 14.sp),
-          ),
-          SizedBox(
-            height: 1.h,
-          ),
-          _buildDropdownButton(context),
-          SizedBox(
-            height: 2.h,
-          ),
+          
+         
           Text(
             'Colors',
             style: Theme.of(context)
@@ -336,9 +161,9 @@ class _AddJournalScreenState extends State<addjournal_screen> {
               MyButton(
                 color: isEditMote ? Colors.green : Color(0xFF5B61B9),
                 width: 40.w,
-                title: isEditMote ? "Update Task" : 'Create Task',
+                title: isEditMote ? "Update Note" : 'Create Note',
                 func: () {
-                  _addtask();
+                  _addnote();
                 },
               )
             ],
@@ -348,95 +173,29 @@ class _AddJournalScreenState extends State<addjournal_screen> {
     );
   }
 
-  _addtask() {
+  _addnote() {
     if (_formKey.currentState!.validate()) {
-      TaskModel task = TaskModel(
+      NoteModel note = NoteModel(
         title: _titlecontroller.text,
         note: _notecontroller.text,
-        date: DateFormat('yyyy-MM-dd').format(currentdate),
-        starttime: _starthour.format(context),
-        endtime: endhour.format(context),
-        reminder: _selectedReminder,
         colorindex: _selectedcolor,
         id: '',
       );
       isEditMote
-          ? FireStoreCrud().updateTask(
-              docid: widget.task!.id,
+          ? FireStoreCrud().updateNote(
+              docid: widget.note!.id,
               title: _titlecontroller.text,
               note: _notecontroller.text,
-              date: DateFormat('yyyy-MM-dd').format(currentdate),
-              starttime: _starthour,
-              endtime: endhour.format(context),
-              reminder: _selectedReminder,
               colorindex: _selectedcolor,
             )
-          : FireStoreCrud().addTask(task: task);
+          : FireStoreCrud().addNote(note: note);
 
-      NotificationsHandler.createScheduledNotification(
-        date: currentdate.day,
-        hour: _starthour.hour,
-        minute: _starthour.minute - _selectedReminder,
-        title: '${Emojis.time_watch} It Is Time For Your Task!!!',
-        body: _titlecontroller.text,
-      );
-
-      NotificationsHandler.createScheduledNotification(
-        date: currentdate.day,
-        hour: endhour.hour,
-        minute: endhour.minute - _selectedReminder,
-        title: '${Emojis.time_watch} Your task ends now!!!',
-        body: _titlecontroller.text,
-      );
-
+      
+      
       Navigator.pop(context);
     }
   }
 
-  DropdownButtonFormField<int> _buildDropdownButton(BuildContext context) {
-    return DropdownButtonFormField(
-      value: _selectedReminder,
-      items: menuItems,
-      style: Theme.of(context)
-          .textTheme
-          .headline4!
-          .copyWith(fontSize: 9.sp, color: Color(0xFF5B61B9)),
-      icon: Icon(
-        Icons.arrow_drop_down,
-        color: Color(0xFF5B61B9),
-        size: 25.sp,
-      ),
-      decoration: InputDecoration(
-        fillColor: Colors.grey.shade200,
-        filled: true,
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
-            borderSide: BorderSide(
-              color: Colors.grey.shade200,
-              width: 0,
-            )),
-        contentPadding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-      ),
-      onChanged: (int? val) {
-        setState(() {
-          _selectedReminder = val!;
-        });
-      },
-    );
-  }
-
-  _showdatepicker() async {
-    var selecteddate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2200),
-      currentDate: DateTime.now(),
-    );
-    setState(() {
-      selecteddate != null ? currentdate = selecteddate : null;
-    });
-  }
 
   Row _buildAppBar(BuildContext context) {
     return Row(
@@ -452,7 +211,7 @@ class _AddJournalScreenState extends State<addjournal_screen> {
           ),
         ),
         Text(
-          isEditMote ? 'Update Task' : 'Add Task',
+          isEditMote ? 'Update Note' : 'Add Note',
           style: Theme.of(context).textTheme.headline4,
         ),
         const SizedBox()

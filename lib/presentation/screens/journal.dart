@@ -1,6 +1,5 @@
 // ignore_for_file: camel_case_types
-
-import 'package:anavrin/data/models/task_model.dart';
+import 'package:anavrin/data/models/note_model.dart';
 import 'package:anavrin/presentation/screens/addjournal_screen.dart';
 import 'package:anavrin/presentation/screens/my_homepage.dart';
 import 'package:anavrin/presentation/widgets/myindicator.dart';
@@ -9,7 +8,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:sizer/sizer.dart';
 import '../../data/repositories/firestore_crud.dart';
 import '../../shared/constants/consts_variables.dart';
-import '../widgets/task_container.dart';
+import '../widgets/note_container.dart';
 import 'aura_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -30,16 +29,13 @@ class _journalState extends State<journal> {
         title: buildTitleWidget(context),
         elevation: 0,
       ),
-      //body: pages[pageIndex],
       body: Column(
         children: [
           Expanded(
               child: StreamBuilder(
-            stream: FireStoreCrud().getTasks(
-              mydate: 'currentdate',
-            ),
+            stream: FireStoreCrud().getNote(),
             builder: (BuildContext context,
-                AsyncSnapshot<List<TaskModel>> snapshot) {
+                AsyncSnapshot<List<NoteModel>> snapshot) {
               if (snapshot.hasError) {
                 return _nodatawidget();
               }
@@ -51,14 +47,12 @@ class _journalState extends State<journal> {
                       physics: const BouncingScrollPhysics(),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        var task = snapshot.data![index];
-                        Widget _taskcontainer = TaskContainer(
-                          id: task.id,
-                          color: colors[task.colorindex],
-                          title: task.title,
-                          starttime: task.starttime,
-                          endtime: task.endtime,
-                          note: task.note,
+                        var note = snapshot.data![index];
+                        Widget _notecontainer = noteContainer(
+                          id: note.id,
+                          color: colors[note.colorindex],
+                          title: note.title,
+                          note: note.note,
                         );
                         return InkWell(
                             onTap: () {},
@@ -66,11 +60,11 @@ class _journalState extends State<journal> {
                                 ? BounceInLeft(
                                     duration:
                                         const Duration(milliseconds: 1000),
-                                    child: _taskcontainer)
+                                    child: _notecontainer)
                                 : BounceInRight(
                                     duration:
                                         const Duration(milliseconds: 1000),
-                                    child: _taskcontainer));
+                                    child: _notecontainer));
                       },
                     )
                   : _nodatawidget();
@@ -94,7 +88,7 @@ class _journalState extends State<journal> {
           ),
           SizedBox(height: 3.h),
           Text(
-            'You\'re All Set',
+            'There\'s Nothing Here',
             style: Theme.of(context)
                 .textTheme
                 .headline4!
@@ -199,7 +193,7 @@ Widget buildTitleWidget(BuildContext context) {
       ),
       InkWell(
         onTap: () => Navigator.push(context,
-            MaterialPageRoute(builder: (context) => addjournal_screen())),
+            MaterialPageRoute(builder: (context) => const Addjournal_screen())),
         child: const Text(
           "Add",
           style: TextStyle(
