@@ -6,6 +6,7 @@ import 'package:anavrin/presentation/widgets/mybutton.dart';
 import 'package:anavrin/presentation/widgets/mytextfield.dart';
 import 'package:anavrin/shared/constants/consts_variables.dart';
 import 'package:anavrin/shared/styles/colors.dart';
+import 'package:anavrin/presentation/widgets/textfield.dart';
 
 
 
@@ -102,7 +103,7 @@ class AddJournalScreenState extends State<Addjournal_screen> {
             height: 2.h,
           ),
           Text(
-            'Note',
+            'Journal',
             style: Theme.of(context)
                 .textTheme
                 .headline4!
@@ -111,18 +112,18 @@ class AddJournalScreenState extends State<Addjournal_screen> {
           SizedBox(
             height: 1.h,
           ),
-          MyTextfield(
-            hint: 'Enter Note',
+          Textfield(
+            hint: 'Type Something',
             icon: Icons.ac_unit,
             showicon: false,
-            maxlenght: 400,
+            maxlenght: 4000,
             validator: (value) {
-              return value!.isEmpty ? "Please Enter A Note" : null;
+              return value!.isEmpty ? "Please Enter Something" : null;
             },
             textEditingController: _notecontroller,
           ),
-          
-         
+
+
           Text(
             'Colors',
             style: Theme.of(context)
@@ -161,7 +162,7 @@ class AddJournalScreenState extends State<Addjournal_screen> {
               MyButton(
                 color: isEditMote ? Colors.green : Color(0xFF5B61B9),
                 width: 40.w,
-                title: isEditMote ? "Update Note" : 'Create Note',
+                title: isEditMote ? "Update Journal" : 'Create an Entry',
                 func: () {
                   _addnote();
                 },
@@ -211,7 +212,7 @@ class AddJournalScreenState extends State<Addjournal_screen> {
           ),
         ),
         Text(
-          isEditMote ? 'Update Note' : 'Add Note',
+          isEditMote ? 'Update Journal' : 'Create Entry',
           style: Theme.of(context).textTheme.headline4,
         ),
         const SizedBox()
@@ -219,3 +220,4 @@ class AddJournalScreenState extends State<Addjournal_screen> {
     );
   }
 }
+
