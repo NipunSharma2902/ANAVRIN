@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, camel_case_types, prefer_const_constructors_in_immutables, prefer_const_constructors, unused_import
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +73,7 @@ Widget buildChatInputWidget(BuildContext context) {
           Expanded(
             child: TextField(
               onChanged: (value) {
+                // ignore: todo
                 // TODO:
               },
               decoration: const InputDecoration.collapsed(
@@ -109,14 +110,14 @@ Widget buildContactInformationWidget() {
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(right: 24.0),
+          padding: EdgeInsets.only(right: 24.0),
           child: SizedBox(
             width: 200.0,
-            child: const Text(
+            child: Text(
               "AURORA",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 32,
                 fontFamily: 'Metropolis Black',
                 fontWeight: FontWeight.bold,

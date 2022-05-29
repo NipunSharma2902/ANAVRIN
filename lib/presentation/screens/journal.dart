@@ -1,12 +1,10 @@
+// ignore_for_file: camel_case_types
+
 import 'package:anavrin/data/models/task_model.dart';
 import 'package:anavrin/presentation/screens/my_homepage.dart';
 import 'package:anavrin/presentation/widgets/myindicator.dart';
 import 'package:anavrin/shared/constants/assets_path.dart';
 import 'package:animate_do/animate_do.dart';
-//import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:flutter/material.dart';
-import 'package:anavrin/presentation/screens/my_homepage.dart';
-import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import '../../data/repositories/firestore_crud.dart';
 import '../../shared/constants/consts_variables.dart';
@@ -15,7 +13,7 @@ import 'aura_screen.dart';
 import 'package:flutter/material.dart';
 
 class journal extends StatefulWidget {
-  journal({Key? key}) : super(key: key);
+  const journal({Key? key}) : super(key: key);
 
   @override
   State<journal> createState() => _journalState();
@@ -164,7 +162,7 @@ Widget _nodatawidget() {
               setState(() {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                  MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
               });
             },

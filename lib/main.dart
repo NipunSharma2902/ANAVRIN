@@ -16,7 +16,6 @@ import 'package:anavrin/presentation/screens/welcome_page.dart';
 import 'package:anavrin/presentation/widgets/myindicator.dart';
 import 'package:anavrin/shared/constants/consts_variables.dart';
 import 'package:anavrin/shared/route.dart';
-import 'package:anavrin/shared/styles/themes.dart';
 
 import 'bloc/auth/authentication_cubit.dart';
 
