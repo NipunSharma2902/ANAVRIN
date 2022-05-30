@@ -8,7 +8,7 @@ import 'package:sizer/sizer.dart';
 import 'package:anavrin/presentation/widgets/mytextfield.dart';
 
 
-final Map<String, dynamic> _question={
+Map<String, dynamic> _question={
   "question": "Hello guys"
 };
 
@@ -70,25 +70,119 @@ class _auraState extends State<aura> {
       body: Column(
         children: [
           buildContactInformationWidget(),
-          buildFutureBuilder(),
+          Expanded(child: buildFutureBuilder(),
+          ),
+          buildSenderMessage("Hello"),
+          buildChatInputWidget(context),
         ],
       ),
-      bottomNavigationBar:buildChatInputWidget(context),
+      
         
     );
   }
+
+
+Widget buildRecieverMessage(String answer) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        const SizedBox(
+          width: 10,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 20.0,
+            ),
+          ),
+        ),
+        Flexible(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
+                  margin: const EdgeInsets.only(
+                    right: 50,
+                    top: 10,
+                    bottom: 10,
+                    left: 10,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFE0E0E0),
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(40.0),
+                      topLeft: Radius.circular(40.0),
+                      bottomRight: Radius.circular(40.0),
+                    ),
+                  ),
+                  child: Text(
+                    answer,
+                    style: const TextStyle(
+                      fontSize: 14.0,
+                      fontFamily: 'Metropolis Regular',
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+
+
+
+
+
+
   FutureBuilder<Reply> buildFutureBuilder() {
   return FutureBuilder<Reply>(
       future: _futureReply,
       builder: (context, snapshot) {
+        String message='It\'s kinda working';
+        Text answer;
+
         if (snapshot.hasData) {
+          answer = Text(snapshot.data!.reply);
           return Text(snapshot.data!.reply);
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         }
 
-        return const CircularProgressIndicator();
-      },
+        return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(36.0),
+          topRight: Radius.circular(36.0),
+        ),
+      ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(36.0),
+          topRight: Radius.circular(36.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
+          child: buildRecieverMessage(message),
+          ),
+
+        ),
+      
+    );
+    
+       },
     );
 }
 }
@@ -153,6 +247,10 @@ Widget buildChatInputWidget(BuildContext context) {
               _controller.text=='Hello';
             }
             _futureReply = createReply(_controller.text);
+            _question={
+              "question":_controller.text
+            };
+            MaterialPageRoute(builder: (context) => buildSenderMessage(_controller.text));
           },
           child: const Text('Send'),
         ),
@@ -161,6 +259,43 @@ Widget buildChatInputWidget(BuildContext context) {
       ),
     ),
   );
+}
+
+Widget buildSenderMessage(String text) {
+  return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 20,
+            ),
+            margin: const EdgeInsets.only(
+              right: 10,
+              top: 10,
+              bottom: 10,
+              left: 300,
+            ),
+            decoration: const BoxDecoration(
+              color: Color(0xFFEDEEF7),
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(40.0),
+                topLeft: Radius.circular(40.0),
+                bottomLeft: Radius.circular(40.0),
+              ),
+            ),
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 14.0,
+                fontFamily: 'Metropolis Regular',
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
 }
 
 Widget buildContactInformationWidget() {
@@ -192,6 +327,10 @@ Widget buildContactInformationWidget() {
       ],
     ),
   );
+
+
+
+
 
 
 
