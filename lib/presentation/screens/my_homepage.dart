@@ -14,7 +14,6 @@ import 'package:anavrin/data/models/task_model.dart';
 import 'package:anavrin/data/repositories/firestore_crud.dart';
 import 'package:anavrin/presentation/widgets/mybutton.dart';
 import 'package:anavrin/presentation/widgets/myindicator.dart';
-import 'package:anavrin/presentation/widgets/mysnackbar.dart';
 import 'package:anavrin/presentation/widgets/mytextfield.dart';
 import 'package:anavrin/presentation/widgets/task_container.dart';
 import 'package:anavrin/shared/constants/assets_path.dart';
@@ -62,20 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: MultiBlocListener(
           listeners: [
-            BlocListener<ConnectivityCubit, ConnectivityState>(
-                listener: (context, state) {
-              if (state is ConnectivityOnlineState) {
-                MySnackBar.error(
-                    message: 'You Are Online Now ',
-                    color: Colors.green,
-                    context: context);
-              } else {
-                MySnackBar.error(
-                    message: 'Please Check Your Internet Connection',
-                    color: Colors.red,
-                    context: context);
-              }
-            }),
+            
             BlocListener<AuthenticationCubit, AuthenticationState>(
               listener: (context, state) {
                 if (state is UnAuthenticationState) {
@@ -318,10 +304,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 title: "Update Profile",
                                 func: () {
                                   if (_usercontroller.text == '') {
-                                    MySnackBar.error(
-                                        message: 'Name shoud not be empty!!',
-                                        color: Colors.red,
-                                        context: context);
+                                    
                                   } else {
                                     authenticationCubit.updateUserInfo(
                                         _usercontroller.text, context);
@@ -412,10 +395,7 @@ class _MyHomePageState extends State<MyHomePage> {
           });
           if (connectivityCubit.state is ConnectivityOnlineState) {
           } else {
-            MySnackBar.error(
-                message: 'Please Check Your Internet Conection',
-                color: Colors.red,
-                context: context);
+            
           }
         },
       ),

@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:anavrin/data/repositories/firebase_auth.dart';
-import 'package:anavrin/presentation/widgets/mysnackbar.dart';
 
 part 'authentication_state.dart';
 
@@ -77,18 +76,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       emit(UpdateProfileSuccessState());
 
       // You need to click twice to update it
-      count == 2
-          ? Navigator.pop(context)
-          : MySnackBar.error(
-              message: 'Please Click Another Time !!',
-              color: Colors.indigo,
-              context: context);
+      if(count == 2){
+          Navigator.pop(context);
+      }
     }).catchError((e) {
       emit(UpdateProfileErrorState());
-      MySnackBar.error(
-          message: 'Please Check Your Internet Connection!!',
-          color: Colors.red,
-          context: context);
+      
     });
   }
 }

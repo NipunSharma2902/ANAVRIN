@@ -1,11 +1,11 @@
-// ignore_for_file: unused_element, camel_case_types, prefer_const_constructors_in_immutables, prefer_const_constructors, unused_import
+// ignore_for_file: unnecessary_null_comparison, prefer_typing_uninitialized_variables, camel_case_types, avoid_unnecessary_containers, avoid_print
+
 import 'dart:async';
 import 'dart:convert';
+import 'package:anavrin/shared/constants/strings.dart';
 import 'package:http/http.dart' as http;
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
-import 'package:anavrin/presentation/widgets/mytextfield.dart';
 
 
 Map<String, dynamic> _question={
@@ -13,12 +13,18 @@ Map<String, dynamic> _question={
 };
 
 
+var messages = <Map<String, dynamic>>[];
 
-Future<Reply> createReply(String question) async {
+
+
+
+
+Future<Reply> createReply() async {
   final response = await http.post(
     Uri.parse('https://chatbot-aurora.herokuapp.com/chatbot?question='+_question["question"],),
   );
-
+  var repl = Reply.fromJson(jsonDecode(response.body));
+    messages.insert(0, {"data": 0, "message": repl.reply});
     return Reply.fromJson(jsonDecode(response.body));
 }
 
@@ -34,10 +40,22 @@ class Reply {
   }
 }
 
+class Question {
+  final String question;
+  const Question({required this.question});
+
+  factory Question.fromJson(Map<String, dynamic> json) {
+    return Question(
+      question: json['question'],
+    );
+  }
+  
+}
 
 
 final TextEditingController _controller = TextEditingController();
-  Future<Reply>? _futureReply;
+  
+  Future<Question>? _futureQuestion;
 
 
 
@@ -47,7 +65,7 @@ final TextEditingController _controller = TextEditingController();
 
 
 class aura extends StatefulWidget {
-  aura({Key? key, user}) : super(key: key);
+  const aura({Key? key, user}) : super(key: key);
 
   @override
   State<aura> createState() => _auraState();
@@ -60,159 +78,42 @@ class _auraState extends State<aura> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF5B61B9),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
+        shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(40),
+                  ),
+        ),
+        toolbarHeight: 90,
         automaticallyImplyLeading: false,
-        backgroundColor: Color(0xFF5B61B9),
-        title: buildTitleWidget(context),
-        elevation: 0,
-      ),
-      body: Column(
-        children: [
-          buildContactInformationWidget(),
-          Expanded(child: buildFutureBuilder(),
-          ),
-          buildSenderMessage("Hello"),
-          buildChatInputWidget(context),
+        backgroundColor: const Color(0xFF5B61B9),
+        title: Row(children: [
+          buildTitleWidget(context),
+        buildContactInformationWidget(),
         ],
+        ),
+        elevation: 10,
       ),
-      
-        
-    );
-  }
+      body: 
+      Container(
 
-
-Widget buildRecieverMessage(String answer) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        const SizedBox(
-          width: 10,
+      child: Column(
+        children: <Widget>[
+          Flexible(
+            child: ListView.builder(
+              reverse: true,
+              itemCount: messages.length,
+              itemBuilder: (context, index) => chat(
+                messages[index]["message"].toString(),
+                messages[index]["data"]
+              )
+          ),  
         ),
-        Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 20.0,
-            ),
-          ),
-        ),
-        Flexible(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
-                  ),
-                  margin: const EdgeInsets.only(
-                    right: 50,
-                    top: 10,
-                    bottom: 10,
-                    left: 10,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFE0E0E0),
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(40.0),
-                      topLeft: Radius.circular(40.0),
-                      bottomRight: Radius.circular(40.0),
-                    ),
-                  ),
-                  child: Text(
-                    answer,
-                    style: const TextStyle(
-                      fontSize: 14.0,
-                      fontFamily: 'Metropolis Regular',
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
 
 
 
-
-
-
-
-  FutureBuilder<Reply> buildFutureBuilder() {
-  return FutureBuilder<Reply>(
-      future: _futureReply,
-      builder: (context, snapshot) {
-        String message='It\'s kinda working';
-        Text answer;
-
-        if (snapshot.hasData) {
-          answer = Text(snapshot.data!.reply);
-          return Text(snapshot.data!.reply);
-        } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
-        }
-
-        return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(36.0),
-          topRight: Radius.circular(36.0),
-        ),
-      ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(36.0),
-          topRight: Radius.circular(36.0),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
-          child: buildRecieverMessage(message),
-          ),
-
-        ),
-      
-    );
-    
-       },
-    );
-}
-}
-
-
-
-
-
-Widget buildTitleWidget(BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      InkWell(
-        onTap: () => Navigator.of(context).pop(),
-        child: const Text(
-          "Back",
-          style: TextStyle(
-            fontSize: 16,
-            fontFamily: 'Metropolis Regular',
-            fontWeight: FontWeight.w400,
-            color: Colors.white54,
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
-Widget buildChatInputWidget(BuildContext context) {
-  return Container(
+Container(
     padding: const EdgeInsets.symmetric(
       horizontal: 12,
       vertical: 18,
@@ -229,7 +130,8 @@ Widget buildChatInputWidget(BuildContext context) {
       child: Row(
         children: [
           Expanded(
-            child: TextField(
+            child: TextFormField(
+              controller: _controller,
               onChanged: (value) {
                 // ignore: todo
                 // TODO:
@@ -242,61 +144,134 @@ Widget buildChatInputWidget(BuildContext context) {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: const Color(0xFF5B61B9),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40.0),
+                ),
+              ),
           onPressed: () {
-            if (_controller.text == null) {
-              _controller.text=='Hello';
+            setState(() {
+              
+            if (_controller.text.isEmpty) {
+              print("Please insert a vlaid message");
             }
-            _futureReply = createReply(_controller.text);
-            _question={
-              "question":_controller.text
-            };
-            MaterialPageRoute(builder: (context) => buildSenderMessage(_controller.text));
+            else{
+              _futureQuestion?.then((question) => _controller.text);
+
+              _question={
+                "question":_controller.text
+              };
+
+              messages.insert(0, {"data": 1, "message": _controller.text});
+              messages[0]["message"]=_controller.text;
+              createReply().whenComplete(() => setState(() {
+                
+              }));
+              _controller.clear();
+            }
+            
+            });
+            
           },
-          child: const Text('Send'),
+          
+          child: const Icon(Icons.send),
         ),
           ),
         ],
       ),
     ),
+  ),
+
+
+
+
+        ],
+      ),
+      ),
+      
+        
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Widget chat(String message, int data) {
+    return Container(
+      padding: const EdgeInsets.only(left: 20, right: 20),
+
+      child: Row(
+          mainAxisAlignment: data == 1 ? MainAxisAlignment.end : MainAxisAlignment.start,
+          children: [
+
+
+        Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Bubble(
+            radius: const Radius.circular(15.0),
+            color: data == 0 ? const Color.fromRGBO(23, 157, 139, 1) : Colors.orangeAccent,
+            elevation: 0.0,
+
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  Flexible(
+                      child: Container(
+                        constraints: const BoxConstraints( maxWidth: 200),
+                        child: Text(
+                          message,
+                          style: const TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ))
+                ],
+              ),
+            )),
+      ),
+
+
+          ],
+        ),
+    );
+  }
+
+
+
+
+Widget buildTitleWidget(BuildContext context) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      InkWell(
+        onTap: () => Navigator.of(context).pop(),
+        child: const Icon(Icons.arrow_back_ios),
+      ),
+    ],
   );
 }
 
-Widget buildSenderMessage(String text) {
-  return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Flexible(
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 20,
-            ),
-            margin: const EdgeInsets.only(
-              right: 10,
-              top: 10,
-              bottom: 10,
-              left: 300,
-            ),
-            decoration: const BoxDecoration(
-              color: Color(0xFFEDEEF7),
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(40.0),
-                topLeft: Radius.circular(40.0),
-                bottomLeft: Radius.circular(40.0),
-              ),
-            ),
-            child: Text(
-              text,
-              style: const TextStyle(
-                fontSize: 14.0,
-                fontFamily: 'Metropolis Regular',
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-}
+
+
+
+
+
+
 
 Widget buildContactInformationWidget() {
   return Padding(
@@ -305,21 +280,21 @@ Widget buildContactInformationWidget() {
       horizontal: 16,
     ),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: const [
         Padding(
-          padding: EdgeInsets.only(right: 24.0),
+          padding: EdgeInsets.only(left: 65) ,
           child: SizedBox(
             width: 200.0,
             child: Text(
               "AURORA",
               style: TextStyle(
                 fontSize: 32,
-                fontFamily: 'Metropolis Black',
-                fontWeight: FontWeight.bold,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.normal,
                 color: Colors.white,
                 wordSpacing: 1.1,
-                letterSpacing: 1.1,
+                letterSpacing: 1.0,
               ),
             ),
           ),

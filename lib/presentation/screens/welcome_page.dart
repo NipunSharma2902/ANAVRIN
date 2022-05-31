@@ -6,7 +6,6 @@ import 'package:anavrin/bloc/auth/authentication_cubit.dart';
 import 'package:anavrin/bloc/connectivity/connectivity_cubit.dart';
 import 'package:anavrin/presentation/widgets/mybutton.dart';
 import 'package:anavrin/presentation/widgets/myindicator.dart';
-import 'package:anavrin/presentation/widgets/mysnackbar.dart';
 import 'package:anavrin/shared/constants/assets_path.dart';
 import 'package:anavrin/shared/constants/strings.dart';
 import 'package:anavrin/shared/styles/colors.dart';
@@ -118,10 +117,6 @@ class WelcomePage extends StatelessWidget {
           if (connectivityCubit.state is ConnectivityOnlineState) {
             cubit.signinanonym();
           } else {
-            MySnackBar.error(
-                message: 'Please Check Your Internet Conection',
-                color: Colors.red,
-                context: context);
           }
         },
         child: Center(

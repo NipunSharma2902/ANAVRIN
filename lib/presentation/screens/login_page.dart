@@ -6,7 +6,6 @@ import 'package:anavrin/bloc/auth/authentication_cubit.dart';
 import 'package:anavrin/bloc/connectivity/connectivity_cubit.dart';
 import 'package:anavrin/presentation/widgets/mybutton.dart';
 import 'package:anavrin/presentation/widgets/myindicator.dart';
-import 'package:anavrin/presentation/widgets/mysnackbar.dart';
 import 'package:anavrin/presentation/widgets/mytextfield.dart';
 import 'package:anavrin/shared/constants/assets_path.dart';
 import 'package:anavrin/shared/constants/strings.dart';
@@ -61,11 +60,7 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocConsumer<AuthenticationCubit, AuthenticationState>(
         listener: (context, state) {
           if (state is AuthenticationErrortate) {
-            // Showing the error message if the user has entered invalid credentials
-            MySnackBar.error(
-                message: state.error.toString(),
-                color: Colors.red,
-                context: context);
+            
           }
         },
         builder: (context, state) {
@@ -148,11 +143,6 @@ class _LoginPageState extends State<LoginPage> {
                                 is ConnectivityOnlineState) {
                               _authenticatewithemailandpass(context, authcubit);
                             } else {
-                              MySnackBar.error(
-                                  message:
-                                      'Please Check Your Internet Conection',
-                                  color: Colors.red,
-                                  context: context);
                             }
                           },
                         ),
@@ -229,11 +219,7 @@ class _LoginPageState extends State<LoginPage> {
                                     is ConnectivityOnlineState) {
                                   authcubit.googleSignIn();
                                 } else {
-                                  MySnackBar.error(
-                                      message:
-                                          'Please Check Your Internet Conection',
-                                      color: Colors.red,
-                                      context: context);
+                                 
                                 }
                               },
                               child: Image.asset(
