@@ -3,29 +3,25 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:anavrin/shared/constants/strings.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 
-
-Map<String, dynamic> _question={
-  "question": "Hello guys"
-};
-
+Map<String, dynamic> _question = {"question": "Hello guys"};
 
 var messages = <Map<String, dynamic>>[];
 
-
-
-
-
 Future<Reply> createReply() async {
   final response = await http.post(
-    Uri.parse('https://chatbot-aurora.herokuapp.com/chatbot?question='+_question["question"],),
+    Uri.parse(
+      'https://chatbot-aurora.herokuapp.com/chatbot?question=' +
+          _question["question"],
+    ),
   );
   var repl = Reply.fromJson(jsonDecode(response.body));
-    messages.insert(0, {"data": 0, "message": repl.reply});
-    return Reply.fromJson(jsonDecode(response.body));
+  messages.insert(0, {"data": 0, "message": repl.reply});
+  return Reply.fromJson(jsonDecode(response.body));
 }
 
 class Reply {
@@ -49,20 +45,11 @@ class Question {
       question: json['question'],
     );
   }
-  
 }
 
-
 final TextEditingController _controller = TextEditingController();
-  
-  Future<Question>? _futureQuestion;
 
-
-
-
-
-
-
+Future<Question>? _futureQuestion;
 
 class aura extends StatefulWidget {
   const aura({Key? key, user}) : super(key: key);
@@ -72,187 +59,151 @@ class aura extends StatefulWidget {
 }
 
 class _auraState extends State<aura> {
-  
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(40),
-                  ),
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(40),
+          ),
         ),
         toolbarHeight: 90,
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFF5B61B9),
-        title: Row(children: [
-          buildTitleWidget(context),
-        buildContactInformationWidget(),
-        ],
+        title: Row(
+          children: [
+            buildTitleWidget(context),
+            buildContactInformationWidget(),
+          ],
         ),
         elevation: 10,
       ),
-      body: 
-      Container(
-
-      child: Column(
-        children: <Widget>[
-          Flexible(
-            child: ListView.builder(
-              reverse: true,
-              itemCount: messages.length,
-              itemBuilder: (context, index) => chat(
-                messages[index]["message"].toString(),
-                messages[index]["data"]
-              )
-          ),  
-        ),
-
-
-
-Container(
-    padding: const EdgeInsets.symmetric(
-      horizontal: 12,
-      vertical: 18,
-    ),
-    color: Colors.white,
-    child: Container(
-      padding: const EdgeInsets.only(
-        left: 20,
-      ),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF7F7F8),
-        borderRadius: BorderRadius.circular(40),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextFormField(
-              controller: _controller,
-              onChanged: (value) {
-                // ignore: todo
-                // TODO:
-              },
-              decoration: const InputDecoration.collapsed(
-                hintText: "Type your message...",
-              ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Flexible(
+              child: ListView.builder(
+                  reverse: true,
+                  itemCount: messages.length,
+                  itemBuilder: (context, index) => chat(
+                      messages[index]["message"].toString(),
+                      messages[index]["data"])),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: const Color(0xFF5B61B9),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40.0),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 18,
+              ),
+              color: Colors.white,
+              child: Container(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF7F7F8),
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: _controller,
+                        onChanged: (value) {
+                          // ignore: todo
+                          // TODO:
+                        },
+                        decoration: const InputDecoration.collapsed(
+                          hintText: "Type your message...",
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color(0xFF5B61B9),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            if (_controller.text.isEmpty) {
+                              print("Please insert a vlaid message");
+                            } else {
+                              _futureQuestion
+                                  ?.then((question) => _controller.text);
+
+                              _question = {"question": _controller.text};
+
+                              messages.insert(
+                                  0, {"data": 1, "message": _controller.text});
+                              messages[0]["message"] = _controller.text;
+                              createReply().whenComplete(() => setState(() {}));
+                              _controller.clear();
+                            }
+                          });
+                        },
+                        child: const Icon(Icons.send),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-          onPressed: () {
-            setState(() {
-              
-            if (_controller.text.isEmpty) {
-              print("Please insert a vlaid message");
-            }
-            else{
-              _futureQuestion?.then((question) => _controller.text);
-
-              _question={
-                "question":_controller.text
-              };
-
-              messages.insert(0, {"data": 1, "message": _controller.text});
-              messages[0]["message"]=_controller.text;
-              createReply().whenComplete(() => setState(() {
-                
-              }));
-              _controller.clear();
-            }
-            
-            });
-            
-          },
-          
-          child: const Icon(Icons.send),
+            ),
+          ],
         ),
-          ),
-        ],
       ),
-    ),
-  ),
-
-
-
-
-        ],
-      ),
-      ),
-      
-        
     );
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
 Widget chat(String message, int data) {
-    return Container(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-
-      child: Row(
-          mainAxisAlignment: data == 1 ? MainAxisAlignment.end : MainAxisAlignment.start,
-          children: [
-
-
+  return Container(
+    padding: const EdgeInsets.only(left: 20, right: 20),
+    child: Row(
+      mainAxisAlignment:
+          data == 1 ? MainAxisAlignment.end : MainAxisAlignment.start,
+      children: [
         Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Bubble(
-            radius: const Radius.circular(15.0),
-            color: data == 0 ? const Color.fromRGBO(23, 157, 139, 1) : Colors.orangeAccent,
-            elevation: 0.0,
-
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-
-                  const SizedBox(
-                    width: 10.0,
-                  ),
-                  Flexible(
-                      child: Container(
-                        constraints: const BoxConstraints( maxWidth: 200),
-                        child: Text(
-                          message,
-                          style: const TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                      ))
-                ],
-              ),
-            )),
-      ),
-
-
-          ],
+          padding: const EdgeInsets.all(10.0),
+          child: Bubble(
+              radius: const Radius.circular(15.0),
+              color: data == 0
+                  ? Color(0xFF5B61B9)
+                  : Color.fromARGB(255, 113, 122, 127),
+              elevation: 0.0,
+              child: Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    Flexible(
+                        child: Container(
+                      constraints: const BoxConstraints(maxWidth: 200),
+                      child: Text(
+                        message,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w200),
+                      ),
+                    ))
+                  ],
+                ),
+              )),
         ),
-    );
-  }
-
-
-
+      ],
+    ),
+  );
+}
 
 Widget buildTitleWidget(BuildContext context) {
   return Row(
@@ -266,13 +217,6 @@ Widget buildTitleWidget(BuildContext context) {
   );
 }
 
-
-
-
-
-
-
-
 Widget buildContactInformationWidget() {
   return Padding(
     padding: const EdgeInsets.symmetric(
@@ -283,7 +227,7 @@ Widget buildContactInformationWidget() {
       mainAxisAlignment: MainAxisAlignment.center,
       children: const [
         Padding(
-          padding: EdgeInsets.only(left: 65) ,
+          padding: EdgeInsets.only(left: 65),
           child: SizedBox(
             width: 200.0,
             child: Text(
@@ -302,13 +246,4 @@ Widget buildContactInformationWidget() {
       ],
     ),
   );
-
-
-
-
-
-
-
-
-
 }

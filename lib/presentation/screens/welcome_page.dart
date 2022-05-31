@@ -57,10 +57,10 @@ class WelcomePage extends StatelessWidget {
                           ?.copyWith(letterSpacing: 3),
                     ),
                     SizedBox(
-                      height: 4.h,
+                      height: 3.h,
                     ),
                     Text(
-                      'Welcome to the best Task manager baby !',
+                      'Welcome to ANAVRIN',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.subtitle1?.copyWith(
                             letterSpacing: 3,
@@ -116,8 +116,7 @@ class WelcomePage extends StatelessWidget {
         onPressed: () {
           if (connectivityCubit.state is ConnectivityOnlineState) {
             cubit.signinanonym();
-          } else {
-          }
+          } else {}
         },
         child: Center(
           child: Text(
