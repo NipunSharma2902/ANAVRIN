@@ -20,21 +20,4 @@ class MyTheme {
           color: Colors.grey,
         ),
       ));
-
-  static ThemeData darkTheme = ThemeData(
-      brightness: Brightness.dark,
-      backgroundColor: Appcolors.black,
-      fontFamily: "Montserrat",
-      textTheme: const TextTheme(
-        headline1: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-          color: Appcolors.white,
-        ),
-        subtitle1: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w300,
-          color: Appcolors.white,
-        ),
-      ));
 }

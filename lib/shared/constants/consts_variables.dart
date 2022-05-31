@@ -6,19 +6,18 @@ import 'package:anavrin/shared/styles/colors.dart';
 List<OnBoardingModel> onboardinglist = const [
   OnBoardingModel(
     img: MyAssets.onboradingone,
-    title: 'Manage Your Task',
-    description:
-        'With This Small App You Can Orgnize All Your Tasks and Duties In A One Single App.',
+    title: 'Manage Your Tasks',
+    description: 'Structure and plan your day with Anavrin.',
   ),
   OnBoardingModel(
     img: MyAssets.onboradingtwo,
-    title: 'Plan Your Day',
-    description: 'Add A Task And The App Will Remind You.',
+    title: 'Reflect on Your Day',
+    description: 'Journal everyday to keep inventory of your thoughts.',
   ),
   OnBoardingModel(
     img: MyAssets.onboradingthree,
-    title: 'Accomplish Your Goals ',
-    description: 'Track Your Activities And Accomplish Your Goals.',
+    title: 'Talk to Aurora ',
+    description: 'A chatbot to help with your mental health queries.',
   ),
 ];
 
