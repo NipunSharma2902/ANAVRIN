@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Todo App',
+            title: 'ANAVRIN',
             onGenerateRoute: approute.generateRoute,
             home: StreamBuilder<User?>(
               stream: FirebaseAuth.instance.authStateChanges(),
