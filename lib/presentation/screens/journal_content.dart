@@ -18,8 +18,7 @@ class journal_content extends StatefulWidget {
 }
 
 class _journal_contentState extends State<journal_content> {
-  late TextEditingController _titlecontroller;
-  late TextEditingController _notecontroller;
+
 
   final _formKey = GlobalKey<FormState>();
   late int _selectedcolor;
@@ -27,17 +26,14 @@ class _journal_contentState extends State<journal_content> {
   @override
   void initState() {
     super.initState();
-    _titlecontroller = TextEditingController(text: widget.note!.title);
-    _notecontroller = TextEditingController(text: widget.note!.note);
     _selectedcolor = widget.note!.colorindex;
   }
 
   @override
   void dispose() {
     super.dispose();
-    _titlecontroller.dispose();
-    _notecontroller.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
