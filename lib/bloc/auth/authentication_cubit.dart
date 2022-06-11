@@ -76,12 +76,11 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       emit(UpdateProfileSuccessState());
 
       // You need to click twice to update it
-      if(count == 2){
-          Navigator.pop(context);
+      if (count == 2) {
+        Navigator.pop(context);
       }
     }).catchError((e) {
       emit(UpdateProfileErrorState());
-      
     });
   }
 }
