@@ -1,5 +1,7 @@
+import 'package:anavrin/presentation/screens/journal_content.dart';
 import 'package:flutter/material.dart';
 import 'package:anavrin/data/models/task_model.dart';
+import 'package:anavrin/data/models/note_model.dart';
 import 'package:anavrin/presentation/screens/addtask_screen.dart';
 import 'package:anavrin/presentation/screens/login_page.dart';
 import 'package:anavrin/presentation/screens/my_homepage.dart';
@@ -41,6 +43,14 @@ class AppRoute {
                     task: task,
                   ));
         }
+      case journal_cont:
+      {
+        final note = settings.arguments as NoteModel?;
+          return MaterialPageRoute(
+              builder: (_) => journal_content(  
+                    note: note,
+                  ));
+      }
       default:
         throw 'No Page Found!!';
     }

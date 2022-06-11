@@ -4,12 +4,14 @@ import 'package:anavrin/presentation/screens/addjournal_screen.dart';
 import 'package:anavrin/presentation/screens/my_homepage.dart';
 import 'package:anavrin/presentation/widgets/myindicator.dart';
 import 'package:anavrin/shared/constants/assets_path.dart';
+import 'package:anavrin/shared/constants/strings.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:sizer/sizer.dart';
 import '../../data/repositories/firestore_crud.dart';
 import '../../shared/constants/consts_variables.dart';
 import '../widgets/note_container.dart';
 import 'aura_screen.dart';
+import 'journal_content.dart';
 import 'package:flutter/material.dart';
 
 class journal extends StatefulWidget {
@@ -55,7 +57,9 @@ class _journalState extends State<journal> {
                           note: note.note,
                         );
                         return InkWell(
-                            onTap: () {},
+                            onTap: () {Navigator.pushNamed(
+                                            context, journal_cont,
+                                            arguments: note);},
                             child: index % 2 == 0
                                 ? BounceInLeft(
                                     duration:

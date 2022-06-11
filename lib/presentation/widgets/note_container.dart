@@ -39,7 +39,9 @@ class noteContainer extends StatelessWidget {
         ),
         alignment: Alignment.centerLeft,
       ),
-      child: Container(
+      child: 
+      Flexible(
+        child: Container(
         width: 100.w,
         height: 20.h,
         margin: EdgeInsets.symmetric(vertical: 1.h),
@@ -48,6 +50,7 @@ class noteContainer extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           color: color,
         ),
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,6 +75,7 @@ class noteContainer extends StatelessWidget {
           ],
         ),
       ),
+      )
     );
   }
 }
