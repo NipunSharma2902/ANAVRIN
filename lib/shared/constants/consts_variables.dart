@@ -21,7 +21,7 @@ List<OnBoardingModel> onboardinglist = const [
   ),
 ];
 
-const List<Color> colors = [Appcolors.bleu, Appcolors.pink, Appcolors.yellow];
+const List<Color> colors = [Appcolors.blue, Appcolors.pink, Appcolors.yellow];
 
 const List<String> profileimages = [
   MyAssets.profileicon1,

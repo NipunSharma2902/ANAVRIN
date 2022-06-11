@@ -9,13 +9,9 @@ import 'package:anavrin/shared/constants/consts_variables.dart';
 import 'package:anavrin/shared/styles/colors.dart';
 import 'package:anavrin/presentation/widgets/textfield.dart';
 
-
 class journal_content extends StatefulWidget {
   final NoteModel? note;
-  const journal_content({
-    this.note,
-    Key? key
-    }) : super(key: key);
+  const journal_content({this.note, Key? key}) : super(key: key);
 
   @override
   State<journal_content> createState() => _journal_contentState();
@@ -24,8 +20,19 @@ class journal_content extends StatefulWidget {
 class _journal_contentState extends State<journal_content> {
 
 
-
   final _formKey = GlobalKey<FormState>();
+  late int _selectedcolor;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedcolor = widget.note!.colorindex;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
 
   @override
@@ -33,7 +40,8 @@ class _journal_contentState extends State<journal_content> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Color(0xFF5B61B9),
+        backgroundColor: colors[_selectedcolor],
+        //backgroundColor: Color(0xFF5B61B9),
         title: buildTitleWidget(context),
         elevation: 10,
       ),
@@ -48,8 +56,7 @@ class _journal_contentState extends State<journal_content> {
     );
   }
 
-
-Form _displayform(BuildContext context) {
+  Form _displayform(BuildContext context) {
     return Form(
       key: _formKey,
       child: Column(
@@ -67,15 +74,13 @@ Form _displayform(BuildContext context) {
                 .textTheme
                 .headline4!
                 .copyWith(fontSize: 18.sp),
-                
           ),
-          
           SizedBox(
             height: 2.h,
           ),
           Divider(
             height: 2.h,
-            thickness: 2,
+            thickness: 1,
             color: Colors.black,
           ),
           SizedBox(
@@ -83,10 +88,11 @@ Form _displayform(BuildContext context) {
           ),
           Text(
             widget.note!.note,
-            style: Theme.of(context)
-                .textTheme
-                .headline4!
-                .copyWith(fontSize: 14.sp),
+            style: const TextStyle(
+                fontSize: 16,
+                color: Colors.black38,
+                fontFamily: 'Metropolis',
+                fontWeight: FontWeight.w200),
           ),
         ],
       ),
@@ -94,17 +100,25 @@ Form _displayform(BuildContext context) {
   }
 }
 
-
 Widget buildTitleWidget(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
       InkWell(
-        onTap: () => Navigator.of(context).pop(),
-        child: const Icon(Icons.arrow_back_ios_new)
+          onTap: () => Navigator.of(context).pop(),
+          child: const Icon(Icons.arrow_back_ios_new)),
+      Padding(
+        padding: EdgeInsets.only(left: 65),
       ),
-
-      const Text("                    Journal Entry")
+      const Text("Your thoughts that day",
+          style: TextStyle(
+            fontSize: 22,
+            fontFamily: 'Montserrat',
+            fontWeight: FontWeight.w100,
+            color: Colors.white,
+            wordSpacing: 1.1,
+            letterSpacing: 1.0,
+          ))
     ],
   );
 }

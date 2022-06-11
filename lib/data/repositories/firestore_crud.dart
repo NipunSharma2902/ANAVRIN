@@ -48,20 +48,12 @@ class FireStoreCrud {
     await taskcollection.doc(docid).delete();
   }
 
-
-
-
-
-
-
-
-
-Future<void> addNote({required NoteModel note}) async {
+  Future<void> addNote({required NoteModel note}) async {
     var notecollection = _firestore.collection('notes');
     await notecollection.add(note.tojson());
- }
+  }
 
-Stream<List<NoteModel>> getNote() {
+  Stream<List<NoteModel>> getNote() {
     return _firestore
         .collection('notes')
         .snapshots(includeMetadataChanges: true)
@@ -71,10 +63,7 @@ Stream<List<NoteModel>> getNote() {
   }
 
   Future<void> updateNote(
-      {required String title,
-      note,
-      docid,
-      colorindex}) async {
+      {required String title, note, docid, colorindex}) async {
     var Notecollection = _firestore.collection('notes');
     await Notecollection.doc(docid).update({
       'title': title,
@@ -87,9 +76,4 @@ Stream<List<NoteModel>> getNote() {
     var Notecollection = _firestore.collection('notes');
     await Notecollection.doc(docid).delete();
   }
-
-
-
-
-
 }
