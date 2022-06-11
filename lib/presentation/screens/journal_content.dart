@@ -1,13 +1,8 @@
-import 'package:anavrin/presentation/screens/journal.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:anavrin/data/models/note_model.dart';
-import 'package:anavrin/data/repositories/firestore_crud.dart';
-import 'package:anavrin/presentation/widgets/mybutton.dart';
-import 'package:anavrin/presentation/widgets/mytextfield.dart';
 import 'package:anavrin/shared/constants/consts_variables.dart';
 import 'package:anavrin/shared/styles/colors.dart';
-import 'package:anavrin/presentation/widgets/textfield.dart';
 
 class journal_content extends StatefulWidget {
   final NoteModel? note;
@@ -107,12 +102,12 @@ Widget buildTitleWidget(BuildContext context) {
       InkWell(
           onTap: () => Navigator.of(context).pop(),
           child: const Icon(Icons.arrow_back_ios_new)),
-      Padding(
+      const Padding(
         padding: EdgeInsets.only(left: 65),
       ),
       const Text("Your thoughts that day",
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 18,
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.w100,
             color: Colors.white,
