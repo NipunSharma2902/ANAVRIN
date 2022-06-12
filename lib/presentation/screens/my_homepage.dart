@@ -1,6 +1,6 @@
 import 'package:anavrin/presentation/screens/journal.dart';
 import 'package:animate_do/animate_do.dart';
-//import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,6 @@ import 'package:anavrin/shared/constants/strings.dart';
 import 'package:anavrin/shared/services/notification_service.dart';
 import 'package:anavrin/shared/styles/colors.dart';
 import 'aura_screen.dart';
-import 'addjournal_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -88,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         InkWell(
                           onTap: () {
-                            // NotificationsHandler.createNotification();
+                            NotificationsHandler.createNotification();
                           },
                           child: SizedBox(
                             height: 8.h,
