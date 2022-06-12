@@ -359,7 +359,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               title: _titlecontroller.text,
               note: _notecontroller.text,
               date: DateFormat('yyyy-MM-dd').format(currentdate),
-              starttime: _starthour,
+              starttime: _starthour.format(context),
               endtime: endhour.format(context),
               reminder: _selectedReminder,
               colorindex: _selectedcolor,

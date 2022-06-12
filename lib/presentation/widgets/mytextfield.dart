@@ -55,7 +55,8 @@ class MyTextfield extends StatelessWidget {
           contentPadding:
               EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.3.h),
           hintStyle: Theme.of(context).textTheme.headline1?.copyWith(
-                fontSize: 10.sp,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.bold,
                  color: Colors.black38,
               ),
           prefixIcon: showicon

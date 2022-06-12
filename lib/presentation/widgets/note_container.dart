@@ -22,6 +22,7 @@ class noteContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: Key(id),
+      direction: DismissDirection.startToEnd,
       onDismissed: (direction) {
         FireStoreCrud().deleteNote(docid: id);
       },
