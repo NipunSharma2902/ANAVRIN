@@ -27,7 +27,7 @@ class OnBoardingItem extends StatelessWidget {
             height: 4.h,
           ),
           SizedBox(
-            height: 40.h,
+            height: 35.h,
             child: Image.asset(
               image,
               fit: BoxFit.cover,

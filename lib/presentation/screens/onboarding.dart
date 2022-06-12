@@ -49,56 +49,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 children: [
                   Container(
                       width: 100.w,
-                      height: 95.h,
+                      height: 92.h,
                       color: Color(0xFF5B61B9),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10.w,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    _pageController.previousPage(
-                                        duration:
-                                            const Duration(milliseconds: 500),
-                                        curve: Curves.easeIn);
-
-                                    cubit.curruntindext > 0
-                                        ? cubit.removefromindex()
-                                        : null;
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 20),
-                                    child: Text(
-                                      'Back',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline4
-                                          ?.copyWith(
-                                            fontSize: 13.sp,
-                                            color: Colors.white38,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                                CustomDots(myindex: cubit.curruntindext),
-                                SizedBox(
-                                  width: 10.w,
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      )),
+                      ),
                   SizedBox(
                     width: 100.w,
-                    height: 90.h,
+                    height: 88.h,
                     child: CustomPaint(
                       painter: const MycustomPainter(color: Appcolors.white),
                       child: SizedBox(
@@ -143,7 +99,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           ))
                       : Container(),
                   Positioned(
-                    bottom: 10.h,
+                    bottom: 9.h,
                     child: CircularButton(
                         color: Appcolors.pink.withOpacity(0.6),
                         width: 30.w,
